@@ -28,7 +28,7 @@ footer:
 author: '不显电性'
 nickname: 'comm_check'
 bio: '可能还算是半个有趣的人'
-avatar: '/assets/img/profile.gif'
+avatar: '/assets/img/profile.jpg'
 
 # Search
 search: true
@@ -61,8 +61,9 @@ sns:
   # juejin: '//juejin.im/user/57a6f434165abd006159b4cc'
   facebook: 'https://www.facebook.com/profile.php?id=100075483824107'
   zhihu: 'https://www.zhihu.com/people/mo-qian-yi-79'
-  instagram: '//www.instagram.com/steveliaocn'
+  instagram: 'https://www.instagram.com/commcheck396/'
   github: 'https://github.com/commcheck396'
+  youtube: 'https://www.youtube.com/channel/UCm7T8NCEp0zSoYRxbgpLiiw'
 
 # Tags 设置标签
 recommend-tags: true # whether or not display recommend-tags on the sidebar
