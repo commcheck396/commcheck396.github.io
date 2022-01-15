@@ -1,0 +1,80 @@
+I"W<blockquote>
+  <p>This is my first Jekyll Project.There are some tests below.</p>
+</blockquote>
+
+<blockquote>
+  <p>this is a test</p>
+</blockquote>
+
+<blockquote>
+  <p>this is a test too</p>
+</blockquote>
+
+<h1 id="welcome-to-comm_checks-placeindex">Welcome to Comm_Check’s Place{#index}</h1>
+<h2 id="test_2nd_topic">test_2nd_topic</h2>
+<h3 id="test-_3rd_topic">test _3rd_topic</h3>
+
+<blockquote>
+  <p>test quote</p>
+  <blockquote>
+    <blockquote>
+      <p>quote 1
+quote 2
+quote 3
+quote 4</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h4 id="test-of-graph">test of graph</h4>
+
+<p><img src="_posts/pics/test_2.jpg" alt="pic from local" /></p>
+
+<p><img src="http://commcheck396.github.io/assets/img/topic_1.jpg" alt="pic from internet" /></p>
+
+<h4 id="test-of-codings">test of codings</h4>
+
+<p>’’’
+include <iostream>;
+using namespace std;</iostream></p>
+
+<p>int main(){
+    for(int i=0;i&lt;10;i++){
+        printf(“test\n”);
+    }
+    return 0;
+}</p>
+
+<p>’’’</p>
+
+<h4 id="test-of-list">test of list</h4>
+
+<p>ordered_list</p>
+<ol>
+  <li>test_1</li>
+  <li>test_2</li>
+  <li>test_3</li>
+</ol>
+
+<p>unordered_list</p>
+<ul>
+  <li>test1</li>
+  <li>test2</li>
+  <li>test3</li>
+</ul>
+
+<h4 id="test-of-text">test of text</h4>
+
+<h1 id="this-is-a-topic">this is a topic</h1>
+<p>this is a passage.
+    this is a paragraph.
+        this is a sentence.
+        <em>this is a sentence.</em>
+        <strong>this is a sentence.</strong>
+        <strong><em>this is a sentence.</em></strong>
+        <em>this is a sentence.</em></p>
+
+<p>this is the end of the test.</p>
+
+<p>return to the <a href="#index">top</a></p>
+:ET
