@@ -18,7 +18,7 @@ baseurl: ''
 nav:
   home: '/'
   tags: '/tags.html'
-  test : '/test.html'
+  test : '/comment-policy.html'
 
 # Footer
 footer:
@@ -38,7 +38,7 @@ nightMode: true
 
 # Comments 评论功能
 comments:
-  disqus: false
+  disqus: true
   disqus_url: 'https://liaokeyu.disqus.com/embed.js'
 
 # MathJax 公式支持 by Ray-Eldath
@@ -63,7 +63,7 @@ sns:
   zhihu: 'https://www.zhihu.com/people/mo-qian-yi-79'
   instagram: 'https://www.instagram.com/commcheck396/'
   github: 'https://github.com/commcheck396'
-  youtube: 'https://www.youtube.com/channel/UCm7T8NCEp0zSoYRxbgpLiiw'
+  # linkedin: 'https://www.youtube.com/channel/UCm7T8NCEp0zSoYRxbgpLiiw'
 
 # Tags 设置标签
 recommend-tags: true # whether or not display recommend-tags on the sidebar
