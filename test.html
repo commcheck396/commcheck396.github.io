@@ -7,7 +7,7 @@ description: ""
 
 <header class="g-banner np-banner {{ site.postPatterns | prepend: 'post-pattern-' }}" data-theme="{{ site.theme-color }}">
     <div class="post-wrapper">
-        <h1>Oops!</h1><br/><br/><br/>
+        <h1>Oops!</h1><br/><br/>
         <h3>
         <div id="binft"></div>
         <script>
@@ -30,7 +30,7 @@ description: ""
               c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d)
             }
             var l = "",
-            o = ["此页面正在开发中... ...","This Page Is Under Development... ..."].map(function (r) {
+            o = ["此页面正在开发中... ...","This Page Is Under Development..."].map(function (r) {
             return r + ""
             }),
             a = 2,
@@ -51,7 +51,7 @@ description: ""
             };
             binft(document.getElementById('binft'));
         </script>
-        </h3><br/><br/>
+        </h3><br/>
         <img>
         <img src="assets/img/profile.gif" alt="嘿嘿" title="咦？图片也不见了？" width=200 hight=200>
         <span class="subheading">{{ page.description }}</span>
