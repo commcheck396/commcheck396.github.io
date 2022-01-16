@@ -23,4 +23,12 @@ Throughout this guide there are a number of small-but-handy pieces of informatio
 
 ### Video Test
 
-<iframe type="text/html" width="100%" height="385" src="http://www.youtube.com/embed/gfmjMWjn-Xg" frameborder="0"></iframe>
+<!-- <iframe type="text/html" width="100%" height="385" src="https://www.bilibili.com/embed/BV16A411K7Cn?" frameborder="0"></iframe> -->
+<iframe type="text/html" width="100%" height="385" src="//player.bilibili.com/player.html?aid=331959279&bvid=BV16A411K7Cn&cid=305165767&page=1" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<br/>
+<br/>
+<br/>
+
+## 干净又卫生嗷兄弟们
+<br/>
+<div align=center><iframe type="text/html" width="340" height="600" src="//player.bilibili.com/player.html?aid=893047896&bvid=BV1UP4y1E7wA&cid=481738591&page=1" scrolling="no"  frameborder="no" framespacing="0" allowfullscreen="true" text-align="center"> </iframe></div>
