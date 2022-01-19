@@ -1,5 +1,5 @@
-I"*<blockquote>
-  <p>本功能利用Python语言，基于BeautifulSoup，re，urilib，xlwt库实现。<br />
+I"	*<blockquote>
+  <p>本功能利用Python语言，基于BeautifulSoup，re，urilib，xlwt库实现。
 某些页面需要借助gzip，io等库进行处理，才能正常拉取网页源码。</p>
 </blockquote>
 
@@ -113,7 +113,7 @@ findRating = re.compile(r'&lt;span class="rating_num" property="v:average"&gt;(.
 <p><br />
 加一个main函数，异步进行数据拉取（urllib），数据处理（BeautifulSoup，正则提取），数据保存（xlwt），即可得到一张爬取到的数据的excel表。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic4.jpg" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic4.png" alt="pic from internet" /></p>
 
 <p><br />
 学到这我兴冲冲地打开了Bilibili，准备爬百大Up，不管我怎么修改我的代码，我爬取到的网页源代码总是和我在控制台中看到的element不同。</p>

@@ -1,5 +1,0 @@
-I"�<blockquote>
-  <p>本功能利用Python语言，基于BeautifulSoup，re，urilib，xlwt库实现。<br />
-某些页面需要借助gzip，io等库进行处理，才能正常拉取网页源码。</p>
-</blockquote>
-:ET
