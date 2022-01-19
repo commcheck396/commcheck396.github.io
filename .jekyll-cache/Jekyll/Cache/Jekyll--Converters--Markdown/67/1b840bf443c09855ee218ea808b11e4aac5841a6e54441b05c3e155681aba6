@@ -1,4 +1,4 @@
-I"�<blockquote>
+I"s<blockquote>
   <p>本功能利用Python语言基于Selenium，xlwt库实现</p>
 </blockquote>
 
@@ -25,18 +25,19 @@ browser.get(url)
 <h3 id="利用xpath路径进行定位">利用Xpath路径进行定位。</h3>
 <p>首先对Xpath语法进行基础的了解。</p>
 
-<p>图片…*2</p>
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic7.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/assets/img/2022_1_19/pic9.png" alt="pic from internet" /></p>
 
 <p>我们以Bilibili百大Up主页面为例，我们需要获得每个Up主的昵称，简介以及头像图片。<br />
 首先利用控制台的光标定位到我们需要的信息（此处以昵称为例）：</p>
 
-<p>图片</p>
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic6.png" alt="pic from internet" /></p>
 
 <p>然后按照Xpath语法规范定位到相应的代码块<br /></p>
 
 <p><code class="language-plaintext highlighter-rouge">//li[@class="f-sb-s"]//p[@class="name"]</code></p>
 
-<p>图片</p>
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic5.png" alt="pic from internet" /></p>
 
 <p>之后就可以利用<code class="language-plaintext highlighter-rouge">find_element</code>命令对于对应信息进行提取了。需要注意，在当前版本Selenium中<code class="language-plaintext highlighter-rouge">find_element_by_xpath</code>已被弃用。我们应引入<code class="language-plaintext highlighter-rouge">from selenium.webdriver.common.by import By</code>,利用<code class="language-plaintext highlighter-rouge">browser.find_elements(By.XPATH,url)</code>进行信息的提取。<br /></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>desc=browser.find_elements(By.XPATH,'//li[@class="f-sb-s"]//p[@class="desc"]')
@@ -78,7 +79,7 @@ profile=browser.find_elements(By.XPATH,'//li[@class="f-sb-s"]//div[@class="cover
 
 <h3 id="大功告成">大功告成！</h3>
 
-<p>插图
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic8.png" alt="pic from internet" />
 <br />
 <br /></p>
 <h2 id="小爬虫继续给爷爬睡觉喽">小爬虫，继续给爷爬，睡觉喽！</h2>
