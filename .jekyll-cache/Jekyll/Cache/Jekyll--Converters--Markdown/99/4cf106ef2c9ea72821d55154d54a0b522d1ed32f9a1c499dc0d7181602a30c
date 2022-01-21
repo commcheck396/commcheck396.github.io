@@ -1,0 +1,124 @@
+I"�N<blockquote>
+  <p>本功能利用Python语言，基于numpy库实现</p>
+</blockquote>
+
+<p><br />
+利用蒙特卡洛树搜索实现五子棋游戏可以说是一个深度学习入门项目，也算是我第一次接触深度学习领域的项目，过程还算“比较”顺利，但是难度上还是要比之前做过的利用Q-learning实现迷宫寻路要上了一个台阶。<br />
+这篇博客主要介绍五子棋环境以及行棋动作的实现，对于蒙特卡洛树搜索算法的介绍留到<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客</a>吧。</p>
+
+<p><br /></p>
+<h2 id="五子棋棋局环境的搭建">五子棋棋局环境的搭建</h2>
+
+<p>创建一个棋盘类<code class="language-plaintext highlighter-rouge">Class Board</code>，方便我们操作棋子，修改棋盘格局。<br /><br />
+此类的基本属性包括：<br />
+棋盘的宽/长度<code class="language-plaintext highlighter-rouge">size</code>，<br />
+棋盘的初盘<code class="language-plaintext highlighter-rouge">board</code>，<br />
+当前玩家<code class="language-plaintext highlighter-rouge">cur_player</code>，<br />
+属性初始化代码如下：<br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">cur_player</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">board</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="p">),</span> <span class="nb">int</span><span class="p">)</span> <span class="k">if</span> <span class="n">board</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">board</span>     <span class="c1"># 棋盘初始状态，若未传入初盘则当作空棋盘处理
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">cur_player</span> <span class="o">=</span> <span class="n">cur_player</span>   <span class="c1">#-1代表黑子，1代表白子
+</span></code></pre></div></div>
+<p><br />
+创建一个玩家类<code class="language-plaintext highlighter-rouge">Human</code>,方便我们读取落子位置，得到用户落子后棋盘格局。<br />
+此类的基本属性为当前玩家<code class="language-plaintext highlighter-rouge">player</code>初始化为黑子-1，属性初始化代码如下：  <br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+</code></pre></div></div>
+
+<p>这些环境类下有操作棋盘，修改格局的多种功能，分别是：  <br />
+<code class="language-plaintext highlighter-rouge">is_move_legal(self, move_pos)</code>：判断当前动作在当前棋盘下是否合法。<br />
+<code class="language-plaintext highlighter-rouge">get_legal_pos(self)</code>：获取当前棋盘内所有可行棋的位置。<br />
+<code class="language-plaintext highlighter-rouge">move(self, move_pos)</code>：按照move_pos的位置修改当前棋盘格局，即在move_pos位置上放置当前玩家的棋子。<br />
+<code class="language-plaintext highlighter-rouge">board_result(self, move_pos)</code>：判断当前棋盘在当前动作下是否产生输赢或平的局面。<br />
+<code class="language-plaintext highlighter-rouge">game_over(self, move_pos)</code>：判断当前游戏是否结束，输赢方分别是谁，或是否产生平局局面。<br />
+<code class="language-plaintext highlighter-rouge">get_action_pos(self, board)</code>：读取用户输入的落子位置。<br />
+<code class="language-plaintext highlighter-rouge">action(self, board)</code>：获得用户落子后的棋盘格局。<br /></p>
+
+<p><br />
+相应代码如下：<br /><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">is_move_legal(self, move_pos)</code>：判断当前动作在当前棋盘下是否合法。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_move_legal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">move_pos</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">move_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="p">:</span> <span class="c1">#判断是否溢出棋盘边界
+</span>        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>   <span class="c1">#判断是否下在已经有棋子的位置上
+</span>        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">get_legal_pos(self)</code>：获取当前棋盘内所有可行棋的位置。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_legal_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1">#找到棋盘上未落子的位置
+</span>    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="c1">#封装成二元组
+</span></code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">move(self, move_pos)</code>：按照move_pos的位置修改当前棋盘格局，即在move_pos位置上放置当前玩家的棋子</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">move_pos</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_move_legal</span><span class="p">(</span><span class="n">move_pos</span><span class="p">):</span> 
+        <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"move {0} on board {1} is not legal"</span><span class="p">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">move_pos</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">))</span>
+    <span class="n">new_board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="n">board</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">),</span> <span class="n">cur_player</span><span class="o">=-</span><span class="bp">self</span><span class="p">.</span><span class="n">cur_player</span><span class="p">)</span>
+    <span class="n">new_board</span><span class="p">.</span><span class="n">board</span><span class="p">[</span><span class="n">move_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">move_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">cur_player</span>
+    <span class="k">return</span> <span class="n">new_board</span> 
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">board_result(self, move_pos)</code>：判断当前棋盘在当前动作下是否产生输赢或平的局面。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">board_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">move_pos</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">move_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([[</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="p">)]])</span>
+    <span class="n">direction</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="p">)])</span>
+    <span class="n">direction</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+    <span class="n">direction</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">fliplr</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">board</span><span class="p">).</span><span class="n">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">v_list</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">v_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">player</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="n">num_in_a_row_will_win</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">game_over(self, move_pos)</code>：判断当前游戏是否结束，输赢方分别是谁，或是否产生平局局面。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">game_over</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">move_pos</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">board_result</span><span class="p">(</span><span class="n">move_pos</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">'win'</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">get_legal_pos</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">'tie'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">get_action_pos(self, board)</code>：读取用户输入的落子位置。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_action_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Your move(please use commas to separate the two index): "</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  
+            <span class="n">move_pos</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">location</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)])</span>     <span class="c1"># 提取出用户输入的位置信息并封装
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">move_pos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">move_pos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">move_pos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">move_pos</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">board</span><span class="p">.</span><span class="n">get_legal_pos</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Invalid Move"</span><span class="p">)</span>
+        <span class="n">move_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_action_pos</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">move_pos</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">action(self, board)</code>：获得用户落子后的棋盘格局。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
+    <span class="n">move_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_action_pos</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="n">board</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">move_pos</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">board</span><span class="p">,</span> <span class="n">move_pos</span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h3 id="差不多就这么多了">差不多就这么多了</h3>
+<p>将上述简单动作组合在一起，这些环境已经可以实现五子棋的基本功能了，接下来就要把目光聚焦到如何利用蒙特卡洛树搜索训练模型并搭建起人机游戏的模型上，这些内容将放在我的<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客中</a>。</p>
+:ET
