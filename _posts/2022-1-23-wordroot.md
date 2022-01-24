@@ -7,6 +7,8 @@ cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
 tags: TOEFL
 ---
 
+> 记录常见词根
+
 ## ceive/cept=take
 - receive
 - reception
