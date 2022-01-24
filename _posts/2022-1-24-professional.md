@@ -1,0 +1,317 @@
+---
+layout: post
+title: '学科词小记'
+date: 2022-1-23
+author: 不显电性
+cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
+tags: TOEFL
+---
+
+
+# 天文学/astronomy
+- cosmos：宇宙
+- cosmology；一周学
+- cosmic：宇宙学
+- cosmic radiation：宇宙辐射
+- solar：太阳
+- solar eclipse：日食
+- Venus：金星
+- Saturn：土星
+- Uranus：天王星
+- Neptune：海王星
+- lunar：月球的
+- meteor：流星
+- meteor shower：流星雨
+- meteorite：陨石
+- star：恒星
+- stellar：恒星的
+- intergalactic：星系间的
+- interstellar：恒星间的
+- interplanetary：行星间的
+# 地理地质学/geography&geology
+- geography：地理学
+- geographer：地理学家
+- meridian：经线
+- parallel：纬线
+- horizon：地平线
+- equator：赤道
+- arctic：北极，极寒的寂冷的
+- Antarctic：南极
+- topography：地形，地形学
+- plain：平原，平淡的，朴实的
+- plateau：高原，平稳时期
+- lowland：低地，洼地
+- basin：盆地，盆
+- cavern==cave：洞穴
+- terrain：地域
+- subterranean==underground：地下的
+- island
+- islet：小岛（let为后缀的代表小的，幼年的）
+- excavate：挖掘
+- peninsula：半岛
+- insulate：使隔离
+- continent：大陆
+- continental drift：大陆漂移说
+- range：山脉
+- valley：峡谷
+- canyon：峡谷
+- geology：地质学
+- geologist：地质学家
+- crust：迪克
+- mantle：地幔
+- layer：地层，层级，等级
+- stratum：底层，岩层，社会阶层
+- plate：板块
+- erosion：腐蚀
+- erode：侵蚀，风化，削弱
+- igneous：火成的
+- sedimentary rock：沉积岩
+- sediment：沉淀物
+- metamorphic rock：变质岩
+- quartz：石英
+- limestone：石灰岩
+- marble：大理石
+- granite：花岗岩
+- magma：岩浆
+- mineral：矿
+- mineral water：矿泉水
+- ore：矿石
+- deposit：矿床，押金，沉淀，储蓄
+- glacier：冰川
+- glacial：冰川的
+- glacial epoch：冰川前期
+- iceberg：冰川
+- volcano：火山
+- extinct volcano：死火山
+- dormant volcano：休眠火山
+- active volcano：活火山
+- eruption：喷发
+- 
+## 气象学/meteorology
+- meteorologist：气象学家
+- weather forecast：天气预报
+- climate：气候
+- current：气流
+- vapor：蒸汽
+- evaporate：蒸发，不复存在
+- damp/wet/moist/humid：潮湿的
+- humidity：湿度
+- moisture：潮湿，水分
+- saturate：使湿透，饱和
+- frost：霜
+- fog/mist：雾
+- smog：烟雾
+- downpour/torrential rain：倾盆大雨
+- torrent：激流
+- tempest/storm：暴风雨
+- drizzle：细雨
+- shower：阵雨
+- hail：冰雹，下冰雹，大声呼喊
+- hail a cab：叫出租车
+- blizzard/snowstorm：暴风雪
+- avalanche/slide：雪崩
+- breeze：微风，容易，轻松，轻松完成
+- gale：大风，一阵阵大笑
+- whirlwind：旋风
+- whirl：急转，眩晕
+- typhoon：台风
+- hurricane：飓风
+- tornado/cyclone：龙卷风
+## 数学/mathematics
+- mathematician：数学家
+- arithmetic：算术
+- calculation：计算
+- calculator：计算器
+- aggregate：总计
+- fraction：分数
+- digit：数字
+- algebra：代数
+- equation：方程式，等式
+- formula：公式，分子式，配方
+- geometry：几何
+- geometric：几何的
+- quadrilateral：四边形
+- square：正方形
+- triangle：三角形
+- angle：角
+- area：面积
+- rectangle：长方形
+- rectangular：长方形的
+- polygon：多边形 
+- cube：立方形
+- volume：体积，音量
+- sphere：球星
+- circle：原型
+- ellipse：椭圆形
+- cone：圆锥形
+- circumference：圆周，圆的周长
+- perimeter：不规则的图形的周长
+- diameter：直径
+- radius：半径
+- calculus：微积分
+- differential：微分学
+- integral calculus：积分学
+- function：函数
+- probability：概率
+- statistics：统计学
+- 
+人类&考古/anthropology&archeology 
+- anthropoid：类人的
+- anthropologist：人类学家
+- originate：起源于
+- ancestor：祖先
+- homogeneous：同一种族的，同一种类的
+- archeologist：考古学家
+- excavation：挖掘
+- excavate/unearth：挖掘
+- excavator：挖掘机
+- ruins：废墟，遗迹
+- remains：遗迹，遗骸
+- artifact：手工艺品
+- relic：遗物，文物
+- antique：古物，古董
+- antique dealer：古董商
+- stone age
+- bronze age：青铜器时代
+- iron age：铁器时代
+- 
+## 物理学&化学/physics&chemistry
+- mechanics：力学
+- acoustics：声学，声学效果
+- optics：光学
+- optical instrument：光学仪器
+- myopia：近视，目光短浅
+- velocity：速度
+- acceleration：加速度
+- equilibrium：平衡
+- inertia：惯性，懒惰，惰性
+- gravitation：引力
+- gravity：重力，严重性
+- grave：坟墓，严重的（serious）
+- echo：回声，使回响，附和
+- resonance：回声，洪亮
+- resonate：产生共鸣
+- ultrasonic：超声波/超音速
+- static electricity：静电
+- electric current：电流
+- magnetism：磁力，磁性
+- magnetic：有磁性的
+- conductor：导体
+- insulator：绝缘体
+- simiconductor：半导体
+- insulate：使绝缘，使免受影响（insulate sb from sth)
+- intergrated circuit：集成电路
+- chip：芯片，集成块
+- electron tube：电子管
+- vacuum tube：真空管
+- alchemy：炼金术
+- alchemist：炼金术士
+- substance：物质
+- periodic table：周期表
+- compound：化合物
+- hydrocarbon：碳氢化合物
+- solution：溶液
+- dissolve：溶解
+## 生态学/ecology
+- ecologist：生态学家
+- ecosystem：生态系统
+- fauna：动物群
+- flora：植物群
+- incandescent：白热化
+- evanesce：逐渐消散
+- acid rain：酸雨
+- greenhouse：文史
+- infrared radiation：红外线辐射
+- ultraviolet radiation：紫外辐射
+- ozone layer/ozonosphere：臭氧层
+- atmosphere：大气层，氛围
+- hemisphere：半球
+- pollution：污染
+- pollutant：污染物
+- noxious/toxic：有毒的
+- obnoxious：讨厌的，难闻的
+- fumes：废气
+- solid waste：固体垃圾
+- sewage：污水
+- sewage disposal：污水处理
+- sewage purification：污水净化
+## 动物学/zoology
+- invertebrate：无脊椎动物
+- vertebrate：脊椎动物
+- aquatic：水生的
+- reptile：爬行动物
+- amphibian：两栖动物
+- mammal：哺乳动物
+- insect：昆虫 
+- omnivorous：杂食的
+- omnivore：杂食，不挑食
+- herbivorous：食草的
+- herbal：草本的
+- herbivore：食草的
+- carnivorous/predatory：食肉的
+- predator：捕食者
+- prey：捕食，猎物(be/fall prey to sb/sth手某人某事所害)
+- easy prey：容易受骗的人
+- rodent：啮齿动物
+- mollusk：软体动物
+- mollify：抚慰，使平静
+- melt：融化，态度缓和
+- herd：兽群
+- swarm：（昆虫）群
+- flock：（鸟，羊）群，成群结队v.
+- monogamous：一夫一妻制的
+- polygamous：一夫多妻制的
+- polyandrous：一妻多夫制的
+- homeotherm：恒温动物
+- breed：品种，种族，繁殖
+- hatch：孵化，密谋
+- microbe：微生物
+- parasite：寄生虫
+## 植物学/botany
+- botanist：植物学家
+- canopy；树冠层，顶棚
+- foliage/leaf：树叶
+- leaflet：小树叶
+- stem：茎
+- leaf stalk：叶柄
+- blade：叶片
+- shoot/sprout：幼芽，嫩芽
+- trunk：树干，人的躯干，大箱子
+- branch：树枝
+- bark：树皮
+- lawn：草坪
+- meadow：草地，牧场
+- prairie：大草原
+- shrub/bush：灌木
+- bud：花蕾
+- petal：花瓣
+- pollen：花粉
+- pollinate：给授粉
+- wither：凋谢
+- photosynthesis：光合作用
+- symbiosis：共生
+- symbiotic：共生的
+- seed-bearing plant：种子植物
+- stunt：阻止，妨碍
+## 政治学/politics
+- constitution： 宪法
+- legislation：立法
+- democrats：民主党
+- republicans：共和党
+- amendment：修正案
+- congress：美国国会
+- senate：参议院
+- house of representatives：众议院
+- monarchy：君主制
+- anarchism：无政府主义
+- federal system：联邦制
+- metropolitan：大都市的
+- centralized：中央集权的
+- ideology：意识形态
+- radical：激进的，根本的
+- election：选举
+- veto：否决权
+- colonize：殖民
+- colony：殖民地
+- overturning：颠覆性的
+- 

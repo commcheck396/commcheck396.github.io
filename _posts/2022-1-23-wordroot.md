@@ -368,6 +368,10 @@ tags: TOEFL
 -  flammable：易燃的
 -  photography：摄影
 -  photosynthesis：光合作用
+## gl=光
+- gleam：微光
+- glimmer：微光
+- glow：光辉
 ## marin/nav=海洋的
 -  marine：海洋的，海生的，水兵，船舶
 -  submarine：潜水艇
@@ -400,3 +404,80 @@ tags: TOEFL
 -  catastrophe：天灾
 -  catastrophic：灾难性的
 -  astrology：占星学
+## rod=bite
+- erosion：腐蚀
+- erode：侵蚀，风化，削弱
+- rodent：啮齿类动物
+
+## volve=卷
+- evolve：进化
+- involve：卷入                                     
+
+## rupt=break
+- erupt
+- eruption：喷发
+
+## sat=慢的
+- saturate：使石头，饱和
+- satisfy：满足
+
+## rad=以...为中心
+- radius：半径
+- radiation：辐射
+
+## vac=空
+- vacuum；真空
+- vacation：假期
+- vacant：空闲的 
+
+## flor=flower
+- flora：植物群
+- efflorescent：开花
+
+## ac=尖，酸
+- ace
+- acid
+- acerbic：尖酸的
+- acute：尖锐的，急性的
+
+## noc/nox=有毒的，有害的
+- innocence：无辜，天真无邪
+- noxious：有毒的
+- innocent：无辜的
+- obnoxious：讨厌的，难闻的
+
+## aqua=和水有关的
+- aquatic：水生的
+- aqueduct：导水渠 
+- aquarium：水族馆
+
+## hab=居住
+- inhabitant：居民
+- habit：习惯
+- inhabit：居住
+- cohabit：同居
+
+## vivi=活的
+- vivid：活泼生动的
+- survive：幸存的
+- vivisect：活体解剖
+
+## sect=切片
+- section：章节
+- insect：昆虫
+- vivisect：活体解剖
+- intersection：十字路口，交叉路口
+
+## omn=all
+- omnipresent：无处不在的
+- omnivorous：杂食的
+- omniscient：无所不知的
+
+## vor=吃 
+
+## sym=syn=same
+- symbiosis：共生
+
+## leg=与法律有关的
+- legal
+- legislation：立法

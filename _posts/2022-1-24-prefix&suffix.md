@@ -105,7 +105,21 @@ tags: TOEFL
 - combat：与...战斗
 - collaborate：合作，通敌
 - corroborate：证实
-
+## 表示改变的前缀
+- ### meta=超过，改变
+- metamorphic：变质的
+- metabolism：新陈代谢
+## 表示多的前缀
+- ### poly=多
+- polygon：多边形
+- polysemous：一词多义的
+## 表示两个的前缀
+- ### ambi=两个
+- ambivalent：矛盾的
+- amphibian：两栖动物
+## 表示一个
+- ### mono=单一
+- monogamous：一夫一妻制的
 
 # 后缀
 ## 代表人的
@@ -157,6 +171,9 @@ tags: TOEFL
 - relationship 
 - scholarship：奖学金
 ## 其他名词后缀
+- ### gy=学科后缀
+- biology
+- astrology：占星学
 - ### ary/ery/ory=地点型后缀
 - factory
 - dictionary
