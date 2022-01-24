@@ -7,6 +7,7 @@ cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
 tags: TOEFL
 ---
 
+> 记录常见学科词
 
 # 天文学/astronomy
 - cosmos：宇宙
