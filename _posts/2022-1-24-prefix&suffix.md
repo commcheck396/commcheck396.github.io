@@ -7,6 +7,8 @@ cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
 tags: TOEFL
 ---
 
+> 记录常见词缀
+
 # 前缀
 ## 表示向上的词缀
 - ###  sur/super=在...之上，超出
