@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '交流项目总结_Gaussian Processes'
-date: 2022-1-25
+date: 2022-1-26
 author: 不显电性
 cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
 tags: ML Python
