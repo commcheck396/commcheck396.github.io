@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '学科词小记'
-date: 2022-1-23
+date: 2022-1-24
 author: 不显电性
 cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
 tags: TOEFL

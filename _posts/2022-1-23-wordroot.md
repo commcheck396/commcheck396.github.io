@@ -481,3 +481,6 @@ tags: TOEFL
 ## leg=与法律有关的
 - legal
 - legislation：立法
+
+## morph=形态，组成
+- morphology：形态学，形态论
