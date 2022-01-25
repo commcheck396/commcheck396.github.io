@@ -33,7 +33,7 @@ def rbf_kernel(x1, x2, varSigma, lengthscale):
 
 ```
 我们也可以针对这个函数，赋一些比较简单的值，进行一些test：
-```py
+```python
 x = np.linspace(-5, 5, 200).reshape(-1, 1)
 c=x.shape
 # compute covariance matrix
@@ -84,7 +84,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 **测试参数：`varSigma=1.0`,`lengthscale=2.0`,`period=2`**
 
 ### white-noise covariance
-```py
+```python
 def white_kernel(x1, x2, varSigma):
     if x2 is None:
         return varSigma*np.eye(x1.shape[0])
@@ -97,7 +97,7 @@ def white_kernel(x1, x2, varSigma):
 
 
 ### linear covariance
-```py
+```python
 def lin_kernel(x1, x2, varSigma):
     if x2 is None:
         return varSigma*x1.dot(x1.T)
@@ -110,7 +110,7 @@ def lin_kernel(x1, x2, varSigma):
 
 
 ### periodic covariance
-```py
+```python
 def periodic_kernel(x1, x2, varSigma, period, lenthscale):
     if x2 is None:
         d = cdist(x1, x1)
