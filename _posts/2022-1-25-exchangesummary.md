@@ -3,11 +3,13 @@ layout: post
 title: '交流项目总结_Bernoulli Trial'
 date: 2022-1-25
 author: 不显电性
-cover: 'http://commcheck396.github.io/assets/img/2022_1_19/topic1.jpg'
+cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
 tags: ML Python
 ---
 
 > ~~教授好像真的是很想教会我们~~
+
+<br/>
 
 # 伯努利实验
 
