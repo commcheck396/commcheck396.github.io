@@ -1,0 +1,152 @@
+I"�A<blockquote>
+  <p><del>教授好像真的是很想教会我们</del></p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="伯努利分布">伯努利分布</h2>
+<p><strong>伯努利试验</strong>是只有两种可能结果的<strong>单次随机试验</strong>，即对于一个随机变量X而言：</p>
+<ul>
+  <li>P[x = 1]=μ</li>
+  <li>P[x = 0]=1-μ</li>
+</ul>
+
+<p><br /></p>
+
+<p>伯努利试验都可以表达为<strong>“是或否”</strong>的问题。例如：</p>
+<ul>
+  <li>抛一次硬币是正面向上吗？</li>
+  <li>今天的实验课老师会点名吗？</li>
+  <li>明天会下雨吗？</li>
+</ul>
+
+<p><br /></p>
+
+<blockquote>
+  <p>If we know µ we can generate output that is similar to what the actual system does, this means we can predict how the system behaves.Now we want to use examples of the systems predictions training data find µ. So far we have onlyset the likelihood for one data-point, what about when we see lots of them? Now we will make our first assumption, we will assume that each output of the system is independent. This means that we can factorise the distribution over several trials in a simple manner</p>
+</blockquote>
+
+<p>现在不妨假设每次实验都是独立的，当我们进行n次实验时，便可以获得如下的概率分布，称这一串重复的独立试验为<strong>n重伯努利试验</strong>：</p>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/Bern.png" alt="pic from internet" /></p>
+
+<h2 id="先验概率">先验概率</h2>
+
+<blockquote>
+  <p>In order to say something about the system we need to have a prior belief about what we think the parameter µ is.</p>
+</blockquote>
+
+<p>为了说明系统，我们需要对我们为系统指定一个先验概率µ。
+通俗的讲，先验概率就是<strong>事情尚未发生前</strong>，我们对该事发生概率的估计。利用过去历史资料计算得到的先验概率，称为<strong>客观先验概率</strong>； 当历史资料无从取得或资料不完全时，凭人们的主观经验来判断而得到的先验概率，称为<strong>主观先验概率</strong>。例如我们认为抛一枚硬币头向上的概率为0.5，这就是先验概率。
+所谓先验概率，就是我们主观对系统设定的一个先验分布，现在就来说说先验分布。先验分布就是你在取得实验观测值以前对一个参数概率分布的主观判断，不论是否有历史资料支撑，先验分布都需要我们主观进行计算与设定，这也就是为什么贝叶斯统计学一直不被认可的原因，统计学或者数学都是客观的，怎么能加入主观因素呢？但事实证明这样的效果会非常好！
+拿掷硬币的例子来看，在扔之前你会有判断正面的概率是50%，这就是所谓的先验概率，但如果是在打赌，为了让自己的描述准确点，我们可能会说正面的概率为0.5的可能性最大，0.45的几率小点，0.4的几率再小点，0.1的几率几乎没有等等，这就形成了一个先验概率分布。</p>
+
+<h2 id="后验概率">后验概率</h2>
+
+<p>后验概率是指通过调查或其它方式获取新的附加信息，利用贝叶斯公式对先验概率进行修正，而后得到的概率。事情发生可能有很多原因，判断事情发生时由哪个原因引起的概率叫后验概率。<br />
+比如今天上课你没有去，原因有两个，可能是睡过了，也可能是故意翘课。上课时老师点名发现你没来。（这里是一个结果，就就是你没来学校这件事情已经发生了）老师要计算一下概率，分别是因为生病了没来学校的概率和自行车坏了没来学校的概率。<br />
+很显然，后验概率就是在事情发生后判断由哪一个原因引起的概率。这里的事情是你没来上课，原因有睡过了和故意翘课。<br />
+而这就是我们通过机器学习想要得到的数值，通过后验概率，我们可以对现实中的一些情况进行预测。</p>
+
+<h2 id="贝叶斯公式">贝叶斯公式</h2>
+<blockquote>
+  <p>Once we have specified the prior we can just do Bayes’ rule and get the posterior.</p>
+</blockquote>
+
+<p>要通过先验概率求得后验概率，必须要借助贝叶斯公式。<br />
+这一部分是简单的概率论知识的运用，举一个最典型的例子，也是课上的例题，就是已知检出阳性，在各种条件概率的前提下，求出人确实患病的概率：</p>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/qus1.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/assets/img/2022_1_25/qus2.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/assets/img/2022_1_25/qus3.png" alt="pic from internet" /></p>
+
+<p>可见，贝叶斯方程对于解决这类问题十分实用且快捷：</p>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/Bayes.png" alt="pic from internet" /></p>
+
+<h2 id="beta分布">Beta分布</h2>
+
+<blockquote>
+  <p>The second thing we will think of is that it does make sense that if I have a prior of a specific form (say a Gaussian) then I would like the posterior to be of the same form (i.e. Gaussian). So this means that we should choose a prior such that when multiplied with the likelihood it leads to a distribution that is of the same form of the prior. So why is this useful? This is very useful because it means we do not have to compute the denominator in Baye’s rule, the only thing we need to do is to multiply the prior with the likelihood and then identify the parameters that of the distribution, we can do this as we know its form.</p>
+</blockquote>
+
+<p>但是我们无法确认我们的先验概率是完全准确的，<del>如果可以确认，那么就没有机器学习的必要了，</del>所以，我们要不断对我们的模型，根据数据进行更新和维护，但这个更新和维护的计算是十分复杂的，这时，我们就要将目光转到共轭分布，因为在共轭分布中，后验概率分布函数与先验概率分布函数具有相同形式，这时我们仅需进行先验概率与似然性的矩阵乘法，便能得到一个相同形式的后验概率，这就是下一次进行运算的先验概率，以此类推，不断向模型中更新数据，我们便可以获得一个愈加准确的模型。
+<del>至于什么分布是共轭分布，留给数学家吧，我不会算。</del></p>
+
+<p><br />
+而这一部分提到的Beta分布就是一个很典型的共轭分布，我们选择了贝塔分布作为先验概率，其概率分布函数为：</p>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/Beta.png" alt="pic from internet" /></p>
+
+<p>通过一些<del>我非常不擅长的</del>计算，我们便可以得到后验概率：</p>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/post.png" alt="pic from internet" /></p>
+
+<p>利用Beta分布模型，大大降低了我们维护和更新模型的计算复杂度，也使模型的更新和维护在消费级计算机上的运行成为了可能，下面就利用代码对模型进行一些test。<br />
+<code class="language-plaintext highlighter-rouge">mu</code>为我们真实概率分布，<code class="language-plaintext highlighter-rouge">N</code>为模型更新次数，<code class="language-plaintext highlighter-rouge">a</code>,<code class="language-plaintext highlighter-rouge">b</code>为我们设定的先验概率，红线为每次维护模型留下的轨迹，蓝线为维护结束后得到的最终模型。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">a_n</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">X</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+    <span class="n">b_n</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">X</span><span class="p">.</span><span class="nb">sum</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">beta</span><span class="p">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">a_n</span><span class="p">,</span><span class="n">b_n</span><span class="p">)</span>
+<span class="c1"># parameters to generate data
+</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.9</span> 
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="c1"># generate some data
+</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">mu_test</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># now lets define our prior
+</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># p(mu) = Beta(alpha,beta)
+</span><span class="n">prior_mu</span> <span class="o">=</span> <span class="n">beta</span><span class="p">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="c1"># create figure
+</span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="p">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="c1"># plot prior
+</span><span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">prior_mu</span><span class="p">,</span><span class="s">'g'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">prior_mu</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'$\mu$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'$p(\mu|\mathbf{x})$'</span><span class="p">)</span>
+<span class="c1"># lets pick a random (uniform) point from the data
+# and update our assumption with this
+</span><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">X</span><span class="p">[:</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">'r'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu_test</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="mu09n100时先验分布为标准正态分布"><code class="language-plaintext highlighter-rouge">mu=0.9</code>,<code class="language-plaintext highlighter-rouge">N=100</code>时，先验分布为标准正态分布：</h4>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/100.png" alt="pic from internet" /></p>
+
+<p>可以看到，在标准正态分布的先验分布下，即使先验分布与真实分布相差甚远时，经过100轮的维护，最终的模型也很贴合真实分布。</p>
+
+<p><br /></p>
+
+<h4 id="mu09n100时先验分布非标准正态分布"><code class="language-plaintext highlighter-rouge">mu=0.9</code>,<code class="language-plaintext highlighter-rouge">N=100</code>时，先验分布非标准正态分布：</h4>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/100_wrong.png" alt="pic from internet" /></p>
+
+<p>可以看到，在非标准正态分布的先验分布下，由于真实分布与先验分布相差太远，100轮的维护已经不足以获得一个我们满意的模型，需要更多的数据来填补先验分布的误差。</p>
+
+<h4 id="mu09n300时先验分布非标准正态分布"><code class="language-plaintext highlighter-rouge">mu=0.9</code>,<code class="language-plaintext highlighter-rouge">N=300</code>时，先验分布非标准正态分布：</h4>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/300.png" alt="pic from internet" /></p>
+
+<p>可以看到，在非标准正态分布的先验分布下，即使真实分布与先验分布相差太远，300轮的维护后我们获得的模型大大提升了精准度，逐渐向真实分布靠拢。</p>
+
+<h4 id="mu05n50时先验分布为标准正态分布"><code class="language-plaintext highlighter-rouge">mu=0.5</code>,<code class="language-plaintext highlighter-rouge">N=50</code>时，先验分布为标准正态分布：</h4>
+
+<p><img src="http://commcheck396.github.io/assets/img/2022_1_25/50.png" alt="pic from internet" /></p>
+
+<p>可以看到，在标准正态分布的先验分布下，真实分布与先验分布相同时，在50轮的训练中，虽然在过程中出现了一些偏移，但五十轮之后的结果还是十分准确的。</p>
+
+<h5 id="嘿嘿就写这么多走乐">嘿嘿，就写这么多，走乐🥱。</h5>
+:ET
