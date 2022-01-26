@@ -162,7 +162,7 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 
 假设我们已经获得了数据集D，我们要通过这个数据预测出函数的位置，这时可以将联合分布写为：
 
-插图
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/func.png)
 
 其中 µ(·) 和 k(·,·) 是均值和协方差函数，θ 是后者的参数，我们可以利用乘积规则来处理我们的联合分布。  
 我们不妨先利用下方代码随机生成一些点，并计算一下后验分布，观察这些已知的点会对我们的后验分布函数图形造成什么烟的影响。
