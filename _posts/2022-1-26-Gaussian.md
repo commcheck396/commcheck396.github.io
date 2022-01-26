@@ -68,11 +68,13 @@ plt.show()
 
 <br/>
 
+## 先验分布
+
 >The important thing to understand is that even if the process is infinite, as are the number of values the function can be evaluated across, due to the consistency of a GP we can decide to only look at a finite subset of the process. This is what we define using x. Test to increase and decrease the cardinality of the index set. Sampling from the prior is very important as it allows us to see what assumptions we can encode with the parameters. 
 Importantly, the GP places non-zero probability on every function so if you sample for long enough everything will appear, with a few samples you are only seeing the most likely things.
 
 
-由于GP在每个函数上都放置了一个非零的概率，所以，在时间允许的情况下，任何形状的函数都可以被采样到。
+由于GP在每个函数上都放置了一个非零的概率，所以，在时间允许的情况下，任何形状的函数都可以被采样到，所以，提供一个合适的先验分布来缩小置信空间就显得十分必要了。
 
 
 <br/><br/><br/>
@@ -154,4 +156,82 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 
 嘿嘿，对喽。
 
-## 困了，明天再说😴
+## 后验分布
+
+>  In specific a GP is definedas a infinite collection of random variables which are all jointly Gaussian distributed. So lets make use of this. Lets assume that we have observed data D and now we want to predict what the output of the function is at locations x∗
+
+假设我们已经获得了数据集D，我们要通过这个数据预测出函数的位置，这时可以将联合分布写为：
+
+插图
+
+其中 µ(·) 和 k(·,·) 是均值和协方差函数，θ 是后者的参数，我们可以利用乘积规则来处理我们的联合分布。  
+我们不妨先利用下方代码随机生成一些点，并计算一下后验分布，观察这些已知的点会对我们的后验分布函数图形造成什么烟的影响。
+**N为随机生成点的个数**
+```python
+N = 5
+x = np.linspace(-3.1,3,N)
+y = np.sin(2*np.pi/x) + x*0.1 + 0.3*np.random.randn(x.shape[0])
+x = np.reshape(x,(-1,1))
+y = np.reshape(y,(-1,1))
+x_star = np.linspace(-6, 6, 500).reshape(-1,1)
+
+```
+我们不妨先忽略高斯噪声影响，编写基于Gausasian Regression的后验分布计算函数：
+```python
+def gp_prediction(x1, y1, xstar, lengthScale, varSigma):
+    k_starX = rbf_kernel(xstar,x1,lengthScale,varSigma)
+    k_xx = rbf_kernel(x1, None, lengthScale, varSigma)
+    k_starstar = rbf_kernel(xstar,None,lengthScale,varSigma)
+    mu = k_starX.dot(np.linalg.inv(k_xx)).dot(y1)
+    var = k_starstar - k_starX.dot(np.linalg.inv(k_xx)).dot(k_starX.T)
+    return mu, var, xstar
+```
+生成五十个后验分布函数，绘出可视化图形：
+```python 
+Nsamp = 50
+mu_star, var_star, x_star = gp_prediction(x, y, x_star, lengthScale, varSigma)
+# print (mu_star)
+# print("separate")
+# print(var_star)
+# print("separate")
+# print(x_star)
+mu_star=np.squeeze(mu_star)
+f_star = np.random.multivariate_normal(mu_star, var_star, Nsamp)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(x_star, f_star.T)
+ax.scatter(x, y, 200, 'k', '*', zorder=2)
+plt.show()
+```
+### 当无已知点时
+函数图形如下所示：
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/0.png)
+
+不难看出，在无已知点时，各个后验分布函数图像是杂乱无章毫无规律可言的。
+
+### 当有五个已知点时
+函数图像如下所示：
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/5.png)
+
+虽然整体还是偏于无序，但在已知的五点处以及点与点之间呈现了收敛的趋势，不难总结出，已知点让后验分布趋向归一。
+
+### 当有十个已知点时
+函数图像如下所示：
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/10.png)
+
+不难看出，所给的已知点越多，函数图像越趋向于归一，在长度为12的定义域内给定十个已知点，已经可以让后验分布函数图像有一个很不错的收敛。
+
+### 当有十个以上已知点时
+部分函数图像如下所示：
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/10+.png)
+
+随着已知点的增加，函数图像的收敛性不断增强，后验分布函数图像不断收敛，最后几乎收敛成一条线。不仅在比较大的纵坐标分度值下如此，在我对图像进行缩放使分度值统一时结果依然如此，五十条曲线几乎拟合成为同一条。
+当然，在如此小的定义域内有如此多的数据在现实中是很难实现的。  
+
+## 点集的均值和方差
+
+
