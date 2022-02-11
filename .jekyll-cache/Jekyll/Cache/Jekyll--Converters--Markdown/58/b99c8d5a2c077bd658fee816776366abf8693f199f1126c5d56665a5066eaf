@@ -1,0 +1,98 @@
+I"�+<h1 id="补"><del>补</del></h1>
+
+<blockquote>
+  <p>Numpy是类似于Python list的数据结构</p>
+</blockquote>
+
+<h1 id="基本操作">基本操作</h1>
+
+<h2 id="创建变量">创建变量</h2>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cars</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span> <span class="c1"># 与list类似
+</span><span class="p">[</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">8.2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">6.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">9.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">6.6</span><span class="p">]</span>
+<span class="p">],</span>
+<span class="p">[</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">9.2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.4</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">7.6</span><span class="p">]</span>
+<span class="p">],</span>
+<span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"总维度："</span><span class="p">,</span> <span class="n">cars</span><span class="p">.</span><span class="n">ndim</span><span class="p">)</span> <span class="c1"># .ndim可以查询数据维度
+</span><span class="k">print</span><span class="p">(</span><span class="s">"场地 1 数据：</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cars</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">"</span><span class="se">\n</span><span class="s">场地 1 维度："</span><span class="p">,</span> <span class="n">cars</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ndim</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"场地 2 数据：</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cars</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"</span><span class="se">\n</span><span class="s">场地 2 维度："</span><span class="p">,</span> <span class="n">cars</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">ndim</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="数据类型">数据类型</h2>
+
+<h2 id="添加数据">添加数据</h2>
+<p>对于一维的数据，直接进行合并</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cars1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">cars2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">])</span>
+<span class="n">cars</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">cars1</span><span class="p">,</span> <span class="n">cars2</span><span class="p">])</span>
+
+<span class="c1">#cars=[ 5.  10.  12.   6.   5.2  4.2]
+</span></code></pre></div></div>
+<p>若将数据扩大至二维</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">test2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">8.2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">6.3</span><span class="p">])</span>
+
+<span class="c1"># 首先需要把它们都变成二维，下面这两种方法都可以加维度
+</span><span class="n">test1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">test1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">test2</span> <span class="o">=</span> <span class="n">test2</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># test1=[[ 5 10 12  6]]
+# test2=[[ 5.1  8.2 11.   6.3]]
+</span>
+<span class="c1"># 然后再在第一个维度上叠加
+</span><span class="n">all_tests</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">test1</span><span class="p">,</span> <span class="n">test2</span><span class="p">])</span>
+<span class="c1"># all= [[ 5.  10.  12.   6. ] [ 5.1  8.2 11.   6.3]]
+</span></code></pre></div></div>
+
+<p>在不同维度进行合并</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Take data 'all_tests' above for example
+</span><span class="k">print</span><span class="p">(</span><span class="s">"第一维度叠加：</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">all_tests</span><span class="p">,</span> <span class="n">all_tests</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># 第一维度叠加：
+#  [[ 5.  10.  12.   6. ]
+#  [ 5.1  8.2 11.   6.3]
+#  [ 5.  10.  12.   6. ]
+#  [ 5.1  8.2 11.   6.3]]
+</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"第二维度叠加：</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">all_tests</span><span class="p">,</span> <span class="n">all_tests</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># 第二维度叠加：
+#  [[ 5.  10.  12.   6.   5.  10.  12.   6. ]
+#  [ 5.1  8.2 11.   6.3  5.1  8.2 11.   6.3]]
+</span>
+<span class="c1"># Not hard to understand
+</span>
+<span class="c1"># 其实，只要维度能够对齐，你可以在任意维度上进行合并操作。注意，有些数据维度是对不齐的，这样没办法合并
+</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span>
+<span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># 这个没问题
+# [[ 1  2  3  7  8]
+#  [ 4  5  6  9 10]]
+</span>
+<span class="c1"># print(np.concatenate([a,b], axis=0))  # 这个会报错:(
+</span></code></pre></div></div>
+
+<h2 id="array形态改变">array形态改变</h2>
+<p>善用<code class="language-plaintext highlighter-rouge">reshape</code></p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">test1</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 要求行数为4，列数不限，参数为-1时为不限
+# test1=[[ 5] [10] [12] [ 6]]
+</span><span class="n">test1</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># test1=[[[ 5]  [10]] [[12]  [ 6]]]
+# Attention:reshape参数中不可以出现两个及以上-1
+</span></code></pre></div></div>
+:ET
