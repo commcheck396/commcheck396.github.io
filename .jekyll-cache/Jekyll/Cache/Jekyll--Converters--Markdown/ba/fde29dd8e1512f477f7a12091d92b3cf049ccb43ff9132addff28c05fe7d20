@@ -1,0 +1,170 @@
+I".N<h1 id="不能再拖了"><del>不能再拖了</del></h1>
+
+<blockquote>
+  <p>Pythorch，江湖人称小Numpy</p>
+</blockquote>
+
+<p><a href="https://pytorch.org/docs/stable/torch.html">Pytorch常见运算</a></p>
+
+<p><br /></p>
+
+<h2 id="mostly-used">Mostly Used</h2>
+
+<p>Numpy向Torch的转化
+<code class="language-plaintext highlighter-rouge">torch_data = torch.from_numpy(np_data)</code></p>
+
+<p><br /></p>
+
+<p>Torch的矩阵乘法</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">torch</span><span class="p">.</span><span class="n">mm</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">tensor</span><span class="p">)</span>
+<span class="c1"># 'mm' stands for 'matrix multiply'
+# 注意此处与Numpy的区别，不能直接利用.dot()进行运算 
+</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Troch的数学运算规则几乎与Numpy一致，<a href="https://pytorch.org/docs/stable/torch.html">请参考</a></p>
+
+<p><br /></p>
+
+<p>Torch中，若要进行反向传播，需要利用variable进行运算，variable可以一次性将所有修改幅度 (梯度) 都计算出来, 而tensor就没有这个能力。<br />
+但variable中的数据需要tensor类型导入：</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># requires_grad是参不参与误差反向传播, 要不要计算梯度
+</span><span class="n">variable</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>升维</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="激励函数">激励函数</h2>
+
+<p>Torch 中的激励函数有很多, 不过我们平时要用到的就这几个： <strong><code class="language-plaintext highlighter-rouge">relu</code></strong>, <code class="language-plaintext highlighter-rouge">sigmoid</code>, <code class="language-plaintext highlighter-rouge">tanh</code>, <code class="language-plaintext highlighter-rouge">softplus</code>。 
+如何利用激励函数:</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># following are popular activation functions
+</span><span class="n">y_relu</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y_sigmoid</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y_tanh</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y_softplus</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">numpy</span><span class="p">()</span> <span class="c1"># there's no softplus in torch
+</span></code></pre></div></div>
+
+<h2 id="神经网络的搭建与训练">神经网络的搭建与训练</h2>
+
+<h3 id="普通搭建方法">普通搭建方法：</h3>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_feature</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_output</span><span class="p">):</span> <span class="c1"># 分别代表输入，该层神经元个数，输出
+</span>        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_feature</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">predict</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_output</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">hidden</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># 利用relu激励函数
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 搭建含有一层十个hidden神经元的神经网络
+</span>
+<span class="c1"># 结构：
+# Net (
+#   (hidden): Linear (1 -&gt; 10)
+#   (predict): Linear (10 -&gt; 1)
+# )
+</span>
+</code></pre></div></div>
+
+<p><del>🐶都不用，有轮子还不用？</del><br />
+ <br /></p>
+
+<h3 id="我tm直接快速搭建"><del>我tm直接</del>快速搭建</h3>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">net</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="c1"># 注意要大写，这里的ReLU是一个class
+</span>    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 结构：
+# Sequential (
+#   (0): Linear (1 -&gt; 10)
+#   (1): ReLU ()
+#   (2): Linear (10 -&gt; 1)
+# )
+</span></code></pre></div></div>
+
+<h3 id="训练方法">训练方法</h3>
+
+<h4 id="回归拟合">回归拟合</h4>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># optimizer 是训练的工具
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># 传入 net 的所有参数, learning rate
+</span><span class="n">loss_func</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">()</span>      <span class="c1"># 预测值和真实值的误差计算公式 (均方差)
+</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># 喂给 net 训练数据 x, 输出预测值
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>     <span class="c1"># 计算两者的误差,prediction要在前
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>   <span class="c1"># 清空上一步的残余更新参数值
+</span>    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>         <span class="c1"># 误差反向传播, 计算参数更新值
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>        <span class="c1"># 将参数更新值施加到 net 的 parameters 上
+</span></code></pre></div></div>
+
+<h4 id="区分类型">区分类型</h4>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="n">n_feature</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_hidden</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_output</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 几个类别就几个 output
+</span>
+<span class="c1"># optimizer 是训练的工具
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>  <span class="c1"># 传入 net 的所有参数,learning rate
+</span><span class="n">loss_func</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span> 
+<span class="c1"># 注意loss function的改变，此时的输出是二维数据，比如[0.2,0.8]，代表该点属于第一类别的概率为0.2，属于第二类别的概率为0.8，所以不能利用与regression相同的loss function，需要用这个
+</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># 喂给 net 训练数据 x, 输出分析值
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>     <span class="c1"># 计算两者的误差
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>   <span class="c1"># 清空上一步的残余更新参数值
+</span>    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>         <span class="c1"># 误差反向传播, 计算参数更新值
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>        <span class="c1"># 将参数更新值施加到 net 的 parameters 上
+</span>
+</code></pre></div></div>
+
+<h2 id="神经网络的保存与提取">神经网络的保存与提取</h2>
+
+<h3 id="save">save</h3>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">net1</span><span class="p">,</span> <span class="s">'net.pkl'</span><span class="p">)</span>  <span class="c1"># 保存整个网络
+</span><span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">net1</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s">'net_params.pkl'</span><span class="p">)</span>   <span class="c1"># 只保存网络中的参数 (速度快, 占内存少)
+</span></code></pre></div></div>
+
+<h3 id="load">load</h3>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 提取整个网络
+</span>
+<span class="n">net2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'net.pkl'</span><span class="p">)</span> <span class="c1"># 提取网络
+</span><span class="n">prediction</span> <span class="o">=</span> <span class="n">net2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 使用网络
+</span>
+
+<span class="c1"># 提取网络参数
+</span>
+<span class="c1"># 需要新建 net3，再将提取的参数导入该网络中
+</span><span class="n">net3</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">net3</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'net_params.pkl'</span><span class="p">))</span> <span class="c1"># 将保存的参数复制到 net3
+</span><span class="n">prediction</span> <span class="o">=</span> <span class="n">net3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 使用网络
+</span> 
+</code></pre></div></div>
+
+<h2 id="optimizer">Optimizer</h2>
+
+<p><del>无脑Adam就可以了</del>
+几种常见的优化器：<code class="language-plaintext highlighter-rouge">SGD</code>, <code class="language-plaintext highlighter-rouge">Momentum</code>, <code class="language-plaintext highlighter-rouge">RMSprop</code>, <code class="language-plaintext highlighter-rouge">Adam</code><br />
+使用方法：</p>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># different optimizers
+</span><span class="n">opt_SGD</span>         <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net_SGD</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LR</span><span class="p">)</span>
+<span class="n">opt_Momentum</span>    <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net_Momentum</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LR</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span> <span class="c1"># 注意momentum就是SGD的套壳
+</span><span class="n">opt_RMSprop</span>     <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">net_RMSprop</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LR</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">opt_Adam</span>        <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">net_Adam</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LR</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">))</span>
+<span class="c1"># 首选后两个Optimizer，效果较佳
+</span></code></pre></div></div>
+:ET

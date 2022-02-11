@@ -1,0 +1,16 @@
+I"�<blockquote>
+  <p>现在就是后悔，后悔人工智能导论课没有选线性回归的作业😭</p>
+</blockquote>
+
+<h2 id="线性模型">线性模型</h2>
+<blockquote>
+  <p>We observe a data-set D, where we assume the following relationship between the variates.Our task is to infer the function f(·) from D. To simplify things we are going to limit the hypothesis space to be only of linear functions. 
+where we have rewritten the input variate by appending a one so that we can write everything on matrix form. The task that we will perform in this lab is to infer the function parametrised by w by observing D.</p>
+</blockquote>
+
+<p>简而言之，线性回归就是通过给定的点，拟合出一条直线模型，使线到数据点的距离最小。</p>
+
+<p><del>先搁这，回头再补。</del></p>
+
+<p>Feb10更新：诶这<a href="https://commcheck396.github.io/2022/02/11/pytorch_1.html">轮子</a>都造好了，大家怎么不用啊(</p>
+:ET

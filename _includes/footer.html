@@ -1,12 +1,13 @@
 <footer class="g-footer">
   <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
-  <section>{{ site.title }} ©
+  <section>©
   {% assign current = "now" | date: "%Y" | plus: 0%}
   {% unless site.footer.since and site.footer.since == current %}
     {{ site.footer.since }}
     -
   {% endunless %}
   {{ current }}
+  {{ site.title }} All Rights Reserved
   </section>
   <section>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

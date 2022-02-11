@@ -1,4 +1,4 @@
-I"++<blockquote>
+I",<blockquote>
   <p>记录常见学科词</p>
 </blockquote>
 
@@ -22,7 +22,10 @@
   <li>stellar：恒星的</li>
   <li>intergalactic：星系间的</li>
   <li>interstellar：恒星间的</li>
-  <li>interplanetary：行星间的
+  <li>interplanetary：行星间的</li>
+  <li>moon：卫星</li>
+  <li>asteroid：小行星</li>
+  <li>
     <h1 id="地理地质学geographygeology">地理地质学/geography&amp;geology</h1>
   </li>
   <li>geography：地理学</li>
@@ -152,7 +155,9 @@
   <li>function：函数</li>
   <li>probability：概率</li>
   <li>statistics：统计学</li>
-  <li>人类&amp;考古/anthropology&amp;archeology</li>
+  <li>
+    <h2 id="人类考古anthropologyarcheology">人类&amp;考古/anthropology&amp;archeology</h2>
+  </li>
   <li>anthropoid：类人的</li>
   <li>anthropologist：人类学家</li>
   <li>originate：起源于</li>
@@ -316,6 +321,11 @@
   <li>colonize：殖民</li>
   <li>colony：殖民地</li>
   <li>overturning：颠覆性的</li>
-  <li></li>
+  <li>hierarchy：等级制度</li>
+  <li>commerce：商业
+    <ul>
+      <li></li>
+    </ul>
+  </li>
 </ul>
 :ET
