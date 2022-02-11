@@ -29,6 +29,9 @@ tags: TOEFL
 - intergalactic：星系间的
 - interstellar：恒星间的
 - interplanetary：行星间的
+- moon：卫星
+- asteroid：小行星
+- 
 # 地理地质学/geography&geology
 - geography：地理学
 - geographer：地理学家
@@ -156,7 +159,7 @@ tags: TOEFL
 - probability：概率
 - statistics：统计学
 - 
-人类&考古/anthropology&archeology 
+## 人类&考古/anthropology&archeology 
 - anthropoid：类人的
 - anthropologist：人类学家
 - originate：起源于
@@ -315,4 +318,6 @@ tags: TOEFL
 - colonize：殖民
 - colony：殖民地
 - overturning：颠覆性的
-- 
+- hierarchy：等级制度
+- commerce：商业
+  - 

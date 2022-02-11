@@ -484,3 +484,11 @@ tags: TOEFL
 
 ## morph=形态，组成
 - morphology：形态学，形态论
+
+## dorm=睡眠
+- dormancy：休眠状态
+- dormitory：宿舍
+
+## agr=农业，田地
+- agrarian：耕地的
+- agriculture：农业
