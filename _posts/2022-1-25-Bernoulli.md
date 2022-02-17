@@ -7,7 +7,7 @@ cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
 tags: ML Python
 ---
 
-> ~~教授好像真的是很想教会我们~~
+> ### ~~教授好像真的是很想教会我们~~
 
 <br/>
 

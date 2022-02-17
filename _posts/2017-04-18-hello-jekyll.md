@@ -7,7 +7,7 @@ cover: 'http://commcheck396.github.io/assets/img/topic.jpg'
 tags: Jekyll
 ---
 
-> Transform your plain text into static websites and blogs.
+# Transform your plain text into static websites and blogs.
 
 ### Welcome
 

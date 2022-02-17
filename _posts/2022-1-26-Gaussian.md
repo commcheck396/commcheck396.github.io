@@ -7,7 +7,7 @@ cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
 tags: ML Python
 ---
 
-> ~~经典白忙活~~
+> ### ~~经典白忙活~~
 
 <br/>
 线性回归模型的假设空间相当有限，为了让我们的模型更加适应普遍的情况，我们可以引入更加丰富多变的假设，即高斯过程。
