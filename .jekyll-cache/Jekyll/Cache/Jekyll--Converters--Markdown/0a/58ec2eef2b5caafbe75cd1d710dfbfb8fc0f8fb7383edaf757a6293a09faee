@@ -1,0 +1,216 @@
+I"C�<h3 id="我真的不想学英语所以就来填坑了">我真的不想学英语，所以就来填坑了</h3>
+<p>在做人工智能导论作业时初步接触tkinker，但当时大多的操作是照猫画虎，写个便签，记录一下，顺便系统地学习学习。</p>
+
+<h1 id="窗口主体框架">窗口主体框架</h1>
+<p>每一个 tkinter 应用的主体框架都可以包含下面这部分. 定义window窗口 和window的一些属性, 然后书写窗口内容, 最后执行<code class="language-plaintext highlighter-rouge">window.mainloop</code>让窗口活起来.<br />
+首先import library，<code class="language-plaintext highlighter-rouge">import tkinter as tk</code>。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">window</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'my window'</span><span class="p">)</span>
+<span class="n">window</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">'200x100'</span><span class="p">)</span>
+
+<span class="c1"># 这里是窗口的内容
+</span>
+<span class="n">window</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div></div>
+<h2 id="标签">标签</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> 
+    <span class="n">text</span><span class="o">=</span><span class="s">'OMG! this is TK!'</span><span class="p">,</span>    <span class="c1"># 标签的文字
+</span>    <span class="n">bg</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span>     <span class="c1"># 背景颜色
+</span>    <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s">'Arial'</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>     <span class="c1"># 字体和字体大小
+</span>    <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span>  <span class="c1"># 标签长宽
+</span>    <span class="p">)</span>
+<span class="n">l</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>    <span class="c1"># 固定窗口位置
+</span></code></pre></div></div>
+<p>同时，利用如下方式也可以实现窗口的文字变换</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">StringVar</span><span class="p">()</span>    <span class="c1"># 这时文字变量储存器
+</span><span class="n">l</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> 
+    <span class="n">textvariable</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>   <span class="c1"># 使用 textvariable 替换 text, 因为这个可以变化
+</span>    <span class="n">bg</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s">'Arial'</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">l</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="c1"># 也可以这样
+</span><span class="n">l</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s">'yellow'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'empty'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_selection</span><span class="p">():</span>
+    <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'you have selected '</span> <span class="o">+</span> <span class="n">var</span><span class="p">.</span><span class="n">get</span><span class="p">())</span> <span class="c1"># 每次调用该功能标签中的文字都会改变
+</span>
+</code></pre></div></div>
+<h2 id="按钮">按钮</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">b</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> 
+    <span class="n">text</span><span class="o">=</span><span class="s">'hit me'</span><span class="p">,</span>      <span class="c1"># 显示在按钮上的文字
+</span>    <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+    <span class="n">command</span><span class="o">=</span><span class="n">hit_me</span><span class="p">)</span>     <span class="c1"># 点击按钮式执行的命令，按钮被点击即执行hit_me功能
+</span><span class="n">b</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>    <span class="c1"># 按钮位置
+</span>
+<span class="k">def</span> <span class="nf">hit_me</span><span class="p">():</span>
+    <span class="c1"># function 
+</span></code></pre></div></div>
+
+<h2 id="输入框">输入框</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">e</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">window</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="s">'*'</span><span class="p">)</span> <span class="c1"># 用户输入任何内容都显示为*
+</span><span class="n">e</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="c1"># 利用e.get（）可以获取当前输入框中的文字
+</span><span class="n">var</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre></div></div>
+<h2 id="显示框">显示框</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Text</span><span class="p">(</span><span class="n">window</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">t</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="c1"># 利用t.insert()可以实现对显示框中的内容进行改变
+</span><span class="n">t</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">'insert'</span><span class="p">,</span><span class="n">var</span><span class="p">)</span> <span class="c1"># 将var对应的内容插入当前光标的位置
+</span><span class="n">t</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">'end'</span><span class="p">,</span><span class="n">var</span><span class="p">)</span> <span class="c1"># 将var对应的内容插入显示框尾部
+</span></code></pre></div></div>
+
+<h2 id="listbox">Listbox</h2>
+<p><del>用处不大</del></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var2</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">StringVar</span><span class="p">()</span>
+<span class="n">var2</span><span class="p">.</span><span class="nb">set</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">))</span> <span class="c1">#为变量设置值
+</span>
+<span class="c1">#创建Listbox
+</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Listbox</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">listvariable</span><span class="o">=</span><span class="n">var2</span><span class="p">)</span>  <span class="c1">#将var2的值赋给Listbox
+</span>
+<span class="c1">#创建一个list并将值循环添加到Listbox控件中
+</span><span class="n">list_items</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_items</span><span class="p">:</span>
+    <span class="n">lb</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">'end'</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>  <span class="c1">#从最后一个位置开始加入值
+</span><span class="n">lb</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'first'</span><span class="p">)</span>       <span class="c1">#在第一个位置加入'first'字符
+</span><span class="n">lb</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'second'</span><span class="p">)</span>      <span class="c1">#在第二个位置加入'second'字符
+</span><span class="n">lb</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                <span class="c1">#删除第二个位置的字符
+</span><span class="n">lb</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="c1"># 可以利用如下语句获取当前选中的文本
+</span><span class="n">value</span> <span class="o">=</span> <span class="n">lb</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">lb</span><span class="p">.</span><span class="n">curselection</span><span class="p">())</span> <span class="c1"># 获取当前选中的文本
+</span></code></pre></div></div>
+
+<h2 id="选择按钮">选择按钮</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_selection</span><span class="p">():</span>
+    <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'you have selected '</span> <span class="o">+</span> <span class="n">var</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Radiobutton</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'Option A'</span><span class="p">,</span>
+                    <span class="n">variable</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s">'A'</span><span class="p">,</span>
+                    <span class="n">command</span><span class="o">=</span><span class="n">print_selection</span><span class="p">)</span>
+<span class="n">r1</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Radiobutton</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'Option B'</span><span class="p">,</span>
+                    <span class="n">variable</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s">'B'</span><span class="p">,</span>
+                    <span class="n">command</span><span class="o">=</span><span class="n">print_selection</span><span class="p">)</span>
+<span class="n">r2</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">r3</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Radiobutton</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'Option C'</span><span class="p">,</span>
+                    <span class="n">variable</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s">'C'</span><span class="p">,</span>
+                    <span class="n">command</span><span class="o">=</span><span class="n">print_selection</span><span class="p">)</span>
+<span class="n">r3</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="c1"># 其中variable=var, value='A'的意思就是，当我们鼠标选中了其中一个选项，把value的值A放到变量var中，然后赋值给variable，再执行var.get()即可获得选定选项的value。
+</span></code></pre></div></div>
+
+<h2 id="scale">Scale</h2>
+<p>我的最爱！</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Sacle的初始化
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'try me'</span><span class="p">,</span> <span class="n">from_</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span>
+             <span class="n">length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">showvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tickinterval</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">function</span><span class="p">)</span>
+             <span class="c1"># 参数不必多介绍，老痛苦回忆了
+</span><span class="n">s</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+</code></pre></div></div>
+<p>在这里要强调一下scale中的command，他有一个非常牛逼的点，他会自动传入一个参数，所以哉定义其对应的function时要注意加上该参数。<br />
+这里传入的参数是什么呢？不是别的，正是当前scale对应的取值，所以要获得scale上的值，我们可以用下面的方法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'try me'</span><span class="p">,</span> <span class="n">from_</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span>
+             <span class="n">length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">showvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tickinterval</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">function</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">vv</span><span class="p">):</span>
+    <span class="n">v</span><span class="o">=</span><span class="n">vv</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="c1"># 这样便可以随滑块的滑动改变v的取值了
+</span></code></pre></div></div>
+
+<h2 id="勾选项">勾选项</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var1</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">IntVar</span><span class="p">()</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Checkbutton</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'Python'</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="n">var1</span><span class="p">,</span> <span class="n">onvalue</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">command</span><span class="o">=</span><span class="n">print_selection</span><span class="p">)</span>
+<span class="n">c1</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="c1"># 参数onvalue和前面讲的部件radiobutton中的value相似， 当我们选中了这个checkbutton，onvalue的值1就会放入到var1中， 然后var1将其赋值给参数variable，offvalue用法相似，但是offvalue是在没有选中这个checkbutton时，offvalue的值1放入var1.
+</span>
+<span class="k">def</span> <span class="nf">print_selection</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">var1</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">var2</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>   <span class="c1">#如果选中第一个选项，未选中第二个选项
+</span>        <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'I love only Python '</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">var1</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">var2</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#如果选中第二个选项，未选中第一个选项
+</span>        <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'I love only C++'</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">var1</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">var2</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>  <span class="c1">#如果两个选项都未选中
+</span>        <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'I do not love either'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">l</span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">'I love both'</span><span class="p">)</span>             <span class="c1">#如果两个选项都选中
+# 可以通过if-else语句实现不同的组合功能
+</span></code></pre></div></div>
+
+<h2 id="canvas">Canvas</h2>
+<p><del>画棋盘</del><br />
+插入图片</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image_file</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s">'ins.gif'</span><span class="p">)</span> <span class="c1"># 创造一个变量存放ins.gif这张图片,注意图片要存放在根目录
+</span><span class="n">image</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_image</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s">'nw'</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image_file</span><span class="p">)</span>  <span class="c1"># 参数10,10就是图片放入画布的坐标， 而这里的anchor=nw则是把图片的左上角作为锚定点，在加上刚刚给的坐标位置，即可将图片位置确定。
+</span></code></pre></div></div>
+
+<p>画几何图案</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span>
+
+<span class="c1"># 画直线，从x0,y0到x1,y1
+</span><span class="n">line</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_line</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+
+<span class="c1">#创建一个圆，填充色为`red`红色
+</span><span class="n">oval</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_oval</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>  
+
+<span class="c1">#创建一个扇形,start=0和extent=180其实就是从0度到180度
+</span><span class="n">arc</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_arc</span><span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">x1</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">y1</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>  
+
+<span class="c1">#创建一个矩形，同样也可以用fill参数进行填充，在这里不做演示
+</span><span class="n">rect</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_rectangle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="o">+</span><span class="mi">20</span><span class="p">)</span>  
+
+
+</code></pre></div></div>
+<p>移动图形</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">canvas</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 参数(rect,0,2)就是移动rect这个变量，即我们看到的矩形,后面的0和2，也就是横坐标移动0个单位，纵坐标移动2个单位
+</span></code></pre></div></div>
+
+<h2 id="menubar">Menubar</h2>
+<p><del>建菜单栏，我这辈子应该是用不上这个功能</del></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="c1"># 建立菜单栏对象（菜单栏指存放菜单的那个框框）
+</span>
+<span class="n">filemenu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 定义一个空菜单单元
+</span>
+<span class="n">menubar</span><span class="p">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'File'</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">filemenu</span><span class="p">)</span> <span class="c1"># 将上面定义的空菜单命名为`File`，放在菜单栏中
+</span>
+<span class="n">filemenu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'New'</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">do_job</span><span class="p">)</span> <span class="c1"># 在`File`中加入`New`的小菜单，即我们平时看到的下拉菜单，每一个小菜单对应命令操作。如果点击这些单元, 就会触发`do_job`的功能
+</span>
+<span class="n">filemenu</span><span class="p">.</span><span class="n">add_separator</span><span class="p">()</span><span class="c1">##这里就是一条分割线
+</span>
+<span class="n">filemenu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'Exit'</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">window</span><span class="p">.</span><span class="n">quit</span><span class="p">)</span> <span class="c1"># quit功能
+</span>
+
+<span class="c1"># 建立二级菜单
+</span><span class="n">submenu</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">filemenu</span><span class="p">)</span> <span class="c1"># 和上面定义菜单一样，不过此处是在`File`上创建一个空的菜单
+</span>
+<span class="n">filemenu</span><span class="p">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'Import'</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">submenu</span><span class="p">,</span> <span class="n">underline</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 给放入的菜单`submenu`命名为`Import`
+</span>
+<span class="n">submenu</span><span class="p">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">"Submenu1"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">do_job</span><span class="p">)</span><span class="c1">##这里和上面也一样，在`Import`中加入一个小菜单命令`Submenu1`
+</span></code></pre></div></div>
+
+<h2 id="不同的放置方式">不同的放置方式</h2>
+
+<h3 id="pack">pack</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'1'</span><span class="p">).</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s">'top'</span><span class="p">)</span><span class="c1">#上
+</span><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'1'</span><span class="p">).</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s">'bottom'</span><span class="p">)</span><span class="c1">#下
+</span><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'1'</span><span class="p">).</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span><span class="c1">#左
+</span><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">'1'</span><span class="p">).</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s">'right'</span><span class="p">)</span><span class="c1">#右
+</span></code></pre></div></div>
+
+<h3 id="grid">grid</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">j</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># 以表格格式放置，padx就是单元格左右间距，pady就是单元格上下间距,放在表格的(i,j)位置
+</span></code></pre></div></div>
+
+<h3 id="place">place</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s">'nw'</span><span class="p">)</span>
+<span class="c1"># 利用精确坐标定位，anchor为锚点
+</span></code></pre></div></div>
+
+<p>😞呢</p>
+:ET

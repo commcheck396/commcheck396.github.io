@@ -1,0 +1,257 @@
+I"r<h3 id="numpy类似于python中的list而pandas则类似于python中的dictionary最最重要的是它可以提供xls文件的互联端口香">Numpy类似于Python中的list，而Pandas则类似于Python中的Dictionary，最最重要的是它可以提供xls文件的互联端口，香！</h3>
+
+<p><br /></p>
+
+<h2 id="数据的提取与保存">数据的提取与保存</h2>
+<h3 id="数据的提取">数据的提取</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"data/体检数据.xlsx"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="c1">#使用 index_col=0 就是告诉 Pandas，让它使用第一个 column（学号）的数据当做 row 索引。 后面还有很多读取的功能里也有一样的参数。
+#     姓名   身高  体重   肺活量
+# 学号                   
+# 1   小明  168  60  3200
+# 2   小黄  187  80  3800
+# 3   小花  170  70  3400
+</span>
+<span class="c1"># 若没有index_col=0，则会有如下输出，会多了一列 Unnammed：0
+#    学号  姓名   身高  体重   肺活量
+# 0   1  小明  168  60  3200
+# 1   2  小黄  187  80  3800
+# 2   3  小花  170  70  3400
+</span></code></pre></div></div>
+
+<h3 id="数据的保存">数据的保存</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">"data/体检数据_修改.xlsx"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="文本格式数据的提取">文本格式数据的提取</h3>
+<p>txt，csv，log 等这些都可以是纯文本文件，不过值得注意的是，对于 Pandas，它只对结构化的纯文本文件感兴趣。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/体检数据_sep.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"="</span><span class="p">)</span>
+<span class="c1"># 可以利用read_csv来读取文件，sep参数为数据分割符
+</span><span class="n">df_txt</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"data/体检数据_sep_修改.csv"</span><span class="p">)</span>
+<span class="c1"># 保存
+</span></code></pre></div></div>
+
+<h2 id="数据的创建及转换">数据的创建及转换</h2>
+<h3 id="数据序列series">数据序列Series</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"series:"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="c1"># 0    11
+# 1    22
+# 2    33
+# dtype: int64
+</span></code></pre></div></div>
+<p>Numpy，list，Pandas之间的数据可以进行互通：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">])</span> <span class="c1"># Numpy-&gt;Pandas
+</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">])</span> <span class="c1">#list-&gt;Pandas
+</span><span class="n">s</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1"># Pandas-&gt;Numpy
+</span><span class="n">s</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># Pandas-&gt;list
+</span></code></pre></div></div>
+<h3 id="数据表dataframe">数据表DataFrame</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"col1"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">"col2"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="c1">#    col1  col2
+# 0     1     2
+# 1     3     4
+# 外圈的0，1为数据的索引
+</span>
+<span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># 可以通过这种方式查询位置为（0，1）的元素
+# 2
+</span>
+<span class="c1"># 当然，将Pandas抽出来一行就是Series。
+</span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">"col1"</span><span class="p">],</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="c1"># 0    1
+# 1    3
+# Name: col1, dtype: int64 
+</span>
+<span class="c1"># 两条Series合并起来就是一个DataFrame
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"col1"</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]),</span> <span class="s">"col2"</span><span class="p">:</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])})</span>
+<span class="c1">#    col1  col2
+# 0     1     2
+# 1     3     4
+</span>
+<span class="c1"># 也可以利用index参数构建特殊索引
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"col1"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">"col2"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">])</span>
+<span class="c1">#    col1  col2
+# a     1     2
+# b     3     4
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span> <span class="c1"># 查看index和columns
+# Index(['a', 'b'], dtype='object') 
+# Index(['col1', 'col2'], dtype='object')
+</span></code></pre></div></div>
+<h2 id="选取数据">选取数据</h2>
+<p>仅仅用at选择数据未免太low了些。<br />
+DataFrame 会分 Column 和 Row（index）。通常我们的 Column 是特征，Row 是数据样本。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">).</span><span class="n">reshape</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+  <span class="n">data</span><span class="p">,</span> 
+  <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">"abcdef"</span><span class="p">),</span> 
+  <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">"ABCD"</span><span class="p">))</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">"B"</span><span class="p">]</span>
+<span class="c1"># a   -11
+# b    -7
+# c    -3
+# d     1
+# e     5
+# f     9
+# Name: B, dtype: int32
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s">"C"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">]])</span>
+<span class="c1">#     C   B
+# a -10 -11
+# b  -6  -7
+# c  -2  -3
+# d   2   1
+# e   6   5
+# f  10   9
+</span></code></pre></div></div>
+<h3 id="巧用loc">巧用loc</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"c"</span><span class="p">:</span><span class="s">"d"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">:</span><span class="s">"D"</span><span class="p">]</span> <span class="c1"># 注意此处与Numpy的区别，这里的两个区间均为闭区间
+#    B  C  D
+# c -3 -2 -1
+# d  1  2  3
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[[</span><span class="s">"d"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">],</span> <span class="p">:])</span> <span class="c1"># 当然，也可以单独进行选择
+#     A  B  C  D
+# d  0  1  2  3
+# b -8 -7 -6 -5
+</span>
+<span class="c1"># 若我不知道索引的名字，仅指导索引的位置，无妨，Pandas中提供了转换的方式，下面分别为index和column的转换方式
+</span><span class="n">row_labels</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row_labels</span><span class="p">,</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]])</span>
+<span class="c1">#     A  C
+# c -4 -2
+# d  0  2
+</span>
+<span class="n">col_labels</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row_labels</span><span class="p">,</span> <span class="n">col_labels</span><span class="p">])</span>
+<span class="c1">#     A  D
+# c -4 -1
+# d  0  3
+</span></code></pre></div></div>
+<h3 id="妙用iloc">妙用iloc</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 这玩意和Numpy一模一样
+</span><span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># 纯纯的平索引找元素，范围也变成了开区间
+#    B  C
+# c -3 -2
+</span>
+<span class="c1"># 与loc一样，在iloc中也存在索引位置与索引名的转换方式
+</span><span class="n">col_index</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">df:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="n">col_index</span><span class="p">])</span>
+<span class="c1">#      A   B
+# a -12 -11
+# b  -8  -7
+</span>
+<span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">])</span> <span class="c1"># 可以获得label 对应的 index 信息
+</span></code></pre></div></div>
+
+<h2 id="条件过滤">条件过滤</h2>
+<p>这一部分堪称Numpy Pro<br />
+可以用 .loc 或者 .iloc 来做过滤处理。然后用 .loc 来做筛选。由于过滤后的数据是索引名，所以不能利用iloc进行筛选。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 直接在Column中进行筛选
+</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">"A"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># 选在 A Column 中小于 0 的那些数据
+#     A   B   C  D
+# a -12 -11 -10 -9
+# b  -8  -7  -6 -5
+# c  -4  -3  -2 -1
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"~:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">10</span><span class="p">)])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">&gt;=:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># 这两种方法均可以实现选取在第一行数据中不小于-10的数据的功能
+#      C   D
+# a -10  -9
+# b  -6  -5
+# c  -2  -1
+# d   2   3
+# e   6   7
+# f  10  11
+</span>
+
+<span class="c1"># 你甚至可以利用|，&amp;表达组合逻辑
+</span><span class="n">i0</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="p">(</span><span class="n">i0</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">i0</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">11</span><span class="p">)]</span> <span class="c1"># 选在第一行数据不小于 -10 或小于 -11 的数据
+#     A   C   D
+# a -12 -10  -9
+# b  -8  -6  -5
+# c  -4  -2  -1
+# d   0   2   3
+# e   4   6   7
+# f   8  10  11
+</span></code></pre></div></div>
+
+<h2 id="统计方法">统计方法</h2>
+<p>依旧是，Numpy Pro</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span> <span class="c1"># 给爷做个汇报
+#           c0    c1    c2
+# count   3.00  4.00  3.00      count 计数（剔除掉 None 或者 NAN 这种无效数据）
+# unique  2.00  4.00  3.00      unique 表示的是每个 column 中有多少独特的数据
+# top     0.34  0.27  1.22      top 表示出现最多的数据是哪一个
+# freq    2.00  1.00  1.00      req 是继续了 top，表述的是这个出现频率最多的数据，出现的次数有多少次。
+</span>
+
+<span class="c1"># 如果是存数值型的数据（数据中不包含none，nan等），我们跑 describe() 还能看到统计学的信息。
+#             c0        c1        c2
+# count  4.000000  4.000000  4.000000
+# mean   0.503607  0.582502  0.740639
+# std    0.252724  0.423337  0.085855
+# min    0.267212  0.041094  0.622165
+# 25%    0.294123  0.354296  0.709897
+# 50%    0.509518  0.655401  0.759404
+# 75%    0.719002  0.883607  0.790146
+# max    0.728181  0.978112  0.821583
+# 平均数（mean），均方差（std），最小值（min），统计学的 25 分位，50 分位，75 分位各是多少，最大值（max）是多少
+</span></code></pre></div></div>
+<h3 id="求均值">求均值</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># 默认是对0维度求均值
+# c0    0.690000
+# c1    1.355000
+# c2    0.186667
+</span>
+<span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 杜伊第一个维度求均值
+# r0    1.580000
+# r1    0.733333
+# r2    1.010000
+# r3   -0.170000
+</span>
+<span class="c1"># 还有一个比较有用的参数 skipna，这个是用来处理数据中有 None 或者是 NaN 时用的。我们需不需要排除掉有 None 或者 NaN 的数据。 如果需要 skip 掉这些，我们就还是会计算所有行列的数值，只是在计数的时候，扣掉这些 None 和 NaN。而当 skipna=False 的时候， Pandas 只要遇到了 None 或者 NaN，就不计算这列、行的数据了。所以下面你会看到，它只返回了一个 column 的结果。
+</span><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="c1"># c1    1.355
+</span></code></pre></div></div>
+<h3 id="累加累乘">累加累乘</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"sum():</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="nb">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">sum(axis=0):</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">sum(axis=1):</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"prod():</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">prod</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">prod(axis=0):</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">prod</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">prod(axis=1):</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">prod</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># 默认都是0维，不多解释
+</span></code></pre></div></div>
+<h3 id="最大最小">最大最小</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"max():</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="nb">max</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">min():</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="nb">min</span><span class="p">())</span> <span class="c1"># 不多解释
+</span></code></pre></div></div>
+
+<p>不难发现，这些操作都是对某一维度进行操作的，若需要全局操作，可以进行两步操作，或者利用<code class="language-plaintext highlighter-rouge">df.values.ravel()</code>将其转化为Numpy，再利用Numpy的指令进行操作。</p>
+
+<h2 id="处理空值nonenan">处理空值（none/nan）</h2>
+<p>利用<code class="language-plaintext highlighter-rouge">isnull()</code>判断数据中是否有空值</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"默认：</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">())</span>  <span class="c1"># 默认按 axis=0
+</span><span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">axis=1:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># 可以换一个 axis drop
+# 注意，这里是有一个空就扔一列
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df1</span><span class="p">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"all"</span><span class="p">))</span>  <span class="c1"># 在筛选的时候加一个 how="all" 参数，可以仅扔掉全部为空的列
+</span>
+<span class="c1"># 当然，也可以对数据进行填充
+</span><span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>  <span class="c1"># 所有空中填充 111
+</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s">"A"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"B"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"C"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"D"</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># 对不同的特征列进行差异化填充
+</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">).</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">"ABCD"</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"df2:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">fillna(df2):</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df2</span><span class="p">))</span> <span class="c1"># 也可以依据自己给的表格对空位进行填充
+</span></code></pre></div></div>
+:ET
