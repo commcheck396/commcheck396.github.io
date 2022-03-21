@@ -68,7 +68,9 @@ self-attention结构如下图所示：
 
 而这个降维操作，展开来说就是**Add＆Normalize**  
 
-简单来说，Add操作的作用就是在输入中加入残差块，防止神经网络由于layer过多在训练过程中产生退化问题，而这个残差块涉及到resnet方面的知识，对这方面我了解甚少，所以就先不求甚解一下，强行记一下这个东西吧。  
+简单来说，Add操作的作用就是在输入中加入残差块，防止神经网络由于layer过多在训练过程中产生退化问题，而这个残差块涉及到resnet方面的知识，我们目前可以将其理解为将output和input进行求和后输出。
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/residue.png)
 
 Normalization则是在之前很常见的归一化数据的手段，能够加快训练的速度，提高训练的稳定性，也能让训练数据看起来更加规则。  
 
@@ -86,7 +88,7 @@ Batch Normalization是对于相同的维度进行归一化，但是咱们NLP中�
 
 到这里对encoder layer的分析就差不多结束了，至于encoder，就是数个encoder layer首尾相连，无他。  
 
-其实decoder的结构与encoder的结构类似，唯一多出来的一部分就是其中包含mask操作。  
+其实decoder的结构与encoder的结构类似，唯一多出来的一部分就是其中包含mask操作，并且decoder会吸收encoder产生的vector set。  
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/decoder.png)
 
@@ -101,9 +103,17 @@ mask分为两部分，第一部分是针对padding部分的mask，由于输入�
 
 第二部分是sequence mask，sequence mask 是为了使得 decoder 不能看见未来的信息。对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。这在训练的时候有效，因为训练的时候每次我们是将target数据完整输入进decoder中地，预测时不需要，预测的时候我们只能得到前一时刻预测出的输出。  
 
+![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/sequence_mask.png)
+
 那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/sequence.png)
+
+当然，我们利用encoder产生的vector set也当然要在decoder中有所运用，否则岂不是做了白工。  
+
+这一步操作称为cross attention，具体操作就是利用encoder输出的数据和decoder中输入的数据产生不同的矩阵进行两个模块数据间的求attention操作。
+
+![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/cross_attention.png)
 
 剩下的不同，就只剩下在decoder的输出部分了，decoder的输出部分也就是整个的transformer的输出部分。
 
