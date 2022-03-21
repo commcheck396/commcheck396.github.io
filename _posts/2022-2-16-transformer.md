@@ -101,7 +101,8 @@ mask分为两部分，第一部分是针对padding部分的mask，由于输入�
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/padding.png)
 
 
-第二部分是sequence mask，sequence mask 是为了使得 decoder 不能看见未来的信息。对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。这在训练的时候有效，因为训练的时候每次我们是将target数据完整输入进decoder中地，预测时不需要，预测的时候我们只能得到前一时刻预测出的输出。  
+第二部分是sequence mask，sequence mask 是为了使得 decoder 不能看见未来的信息。对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。  
+这在训练的时候有效，因为训练的时候每次我们是将target数据完整输入进decoder中地，预测时不需要，预测的时候我们只能得到前一时刻预测出的输出。  
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/sequence_mask.png)
 
@@ -111,7 +112,7 @@ mask分为两部分，第一部分是针对padding部分的mask，由于输入�
 
 当然，我们利用encoder产生的vector set也当然要在decoder中有所运用，否则岂不是做了白工。  
 
-这一步操作称为cross attention，具体操作就是利用encoder输出的数据和decoder中输入的数据产生不同的矩阵进行两个模块数据间的求attention操作。
+这一步操作称为cross attention，具体操作就是利用encoder输出的数据和decoder中输入的数据产生不同的矩阵进行两个模块数据间的求attention操作。将输出输入到fully connected layer进行拟合训练。
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/cross_attention.png)
 
@@ -124,6 +125,8 @@ Output如图中所示，首先经过一次线性变换，然后Softmax得到输�
 到这里transformer的所有部分也就大概说了一遍了。下面这张图儿还挺形象的。
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_2_14/transformer.gif)
+
+
 
 懂了吗？懂了，但没完全懂，下面再结合着代码看一看吧，纸上得来终觉浅，还得打开VScode。  
 
