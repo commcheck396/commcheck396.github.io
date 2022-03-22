@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '20岁好运'
+title: '祝20岁好运'
 date: 2022-3-22
 author: 不显电性
 cover: 'http://commcheck396.github.io/assets/img/2022_2_25/birthday.jpg'
