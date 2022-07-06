@@ -51,6 +51,6 @@ Java课间打开知乎，热榜前三条：空难，疫情，战争。
 
 晚安。  
 
-            2022.3.22
+2022.3.22
 
 ![pic from internet](http://commcheck396.github.io/assets/img/2022_7/scientist.jpg)
