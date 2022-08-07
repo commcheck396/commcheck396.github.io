@@ -201,4 +201,4 @@ Locate and Label: A Two-stage Identifier for Nested Named Entity Recognition
 ***
 # FGN
 淦，markdown源码叫我弄丢了，但是当初保存的PDF还在，放在这里以作纪念。RIP  
-[FGN-NER](http://commcheck396.github.io/_posts/FGN.pdf)
+[FGN-NER](http://commcheck396.github.io/assets/img/PDF/FGN.pdf)
