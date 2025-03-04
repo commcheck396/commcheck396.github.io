@@ -43,19 +43,19 @@
 <h4 id="当varsigma10lengthscale20时">当<code class="language-plaintext highlighter-rouge">varSigma=1.0</code>,<code class="language-plaintext highlighter-rouge">lengthscale=2.0</code>时：</h4>
 <p>得出如下的函数曲线，接下来我们将使用这个曲线作为基准值进行对比：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/1,2.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/1,2.png" alt="pic from internet" /></p>
 
 <h4 id="当varsigma10lengthscale500时">当<code class="language-plaintext highlighter-rouge">varSigma=1.0</code>,<code class="language-plaintext highlighter-rouge">lengthscale=50.0</code>时：</h4>
 <p>得出如下的函数曲线：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/1,50.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/1,50.png" alt="pic from internet" /></p>
 
 <p>不难看出，在<code class="language-plaintext highlighter-rouge">lengthscale</code>参数较大时，函数的平滑度相较于第一幅函数图像有了很大的提升。</p>
 
 <h4 id="当varsigma100lengthscale20时">当<code class="language-plaintext highlighter-rouge">varSigma=10.0</code>,<code class="language-plaintext highlighter-rouge">lengthscale=2.0</code>时：</h4>
 <p>得出如下函数曲线：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/10,2.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/10,2.png" alt="pic from internet" /></p>
 
 <p>不难看出，在<code class="language-plaintext highlighter-rouge">varSigma</code>参数较大时，函数的纵坐标总体都有了一定程度的增大，说明函数在垂直方向的波动性提升了。</p>
 
@@ -89,7 +89,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 </code></pre></div></div>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/w.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/w.png" alt="pic from internet" /></p>
 
 <h3 id="linear-covariance">linear covariance</h3>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">lin_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">varSigma</span><span class="p">):</span>
@@ -100,7 +100,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 </code></pre></div></div>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/l.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/l.png" alt="pic from internet" /></p>
 
 <h3 id="periodic-covariance">periodic covariance</h3>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">periodic_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">varSigma</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">lenthscale</span><span class="p">):</span>
@@ -112,7 +112,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 </code></pre></div></div>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/p.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/p.png" alt="pic from internet" /></p>
 
 <p>通过对这些图像的观察，我们可以发现不同的协方差函数生成的对应函数图像的特点。<br />
 不仅如此，我们除了可以观察不同函数图像的特点外，还可以将不同的协方差结果相乘，观察函数图形的特点：</p>
@@ -120,21 +120,21 @@ Importantly, the GP places non-zero probability on every function so if you samp
 <h3 id="periodic-covariance--linear-covariance">periodic covariance * linear covariance</h3>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/pxl.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/pxl.png" alt="pic from internet" /></p>
 
 <p>通过观察我们不难发现，这个图像综合了两个协方差图像的特点，既具有线性，在某方向也具有一些周期性，so funny。</p>
 
 <h3 id="periodic-covariance--white-noise-covariance">periodic covariance * white-noise covariance</h3>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/pxw.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/pxw.png" alt="pic from internet" /></p>
 
 <p>哈哈哈哈哈，由于白噪音本身就是杂乱无章的，这幅图像似乎与white-noise covariance单独作用的区别并不大，既然white-noise covariance的影响如此之大，不让让它和linear covariance组合一下，看看会产生什么结果，是否还会像这次一样直接被white-noise covariance同化。</p>
 
 <h3 id="linear-covariance--white-noise-covariance">linear covariance * white-noise covariance</h3>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/lxw.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/lxw.png" alt="pic from internet" /></p>
 
 <p>哈哈，猜中了，但没完全猜中，这幅图像既继承了white-noise covariance的杂乱性，也保留了linear covariance的线性，由于linear covariance的线性，整幅图像才展现出了这样的杂乱这向两侧发散的图形。<br />
 做一个小小的预测，如果我将这三个结果乘在一起，图像形状应该与这幅图类似，纵坐标绝对值稍大，因为periodic covariance的周期性完全被white-noise covariance抵消了。</p>
@@ -142,7 +142,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 <h3 id="linear-covariance--white-noise-covariance--periodic-covariance">linear covariance * white-noise covariance * periodic covariance</h3>
 <p>函数图像如下：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/lxwxp.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/lxwxp.png" alt="pic from internet" /></p>
 
 <p>嘿嘿，对喽。</p>
 
@@ -154,7 +154,7 @@ Importantly, the GP places non-zero probability on every function so if you samp
 
 <p>假设我们已经获得了数据集D，我们要通过这个数据预测出函数的位置，这时可以将联合分布写为：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/func.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/func.png" alt="pic from internet" /></p>
 
 <p>其中 µ(·) 和 k(·,·) 是均值和协方差函数，θ 是后者的参数，我们可以利用乘积规则来处理我们的联合分布。<br />
 我们不妨先利用下方代码随机生成一些点，并计算一下后验分布，观察这些已知的点会对我们的后验分布函数图形造成什么烟的影响。
@@ -195,28 +195,28 @@ Importantly, the GP places non-zero probability on every function so if you samp
 <h3 id="当无已知点时">当无已知点时</h3>
 <p>函数图形如下所示：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/0.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/0.png" alt="pic from internet" /></p>
 
 <p>不难看出，在无已知点时，各个后验分布函数图像是杂乱无章毫无规律可言的。</p>
 
 <h3 id="当有五个已知点时">当有五个已知点时</h3>
 <p>函数图像如下所示：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/5.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/5.png" alt="pic from internet" /></p>
 
 <p>虽然整体还是偏于无序，但在已知的五点处以及点与点之间呈现了收敛的趋势，不难总结出，已知点让后验分布趋向归一。</p>
 
 <h3 id="当有十个已知点时">当有十个已知点时</h3>
 <p>函数图像如下所示：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/10.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/10.png" alt="pic from internet" /></p>
 
 <p>不难看出，所给的已知点越多，函数图像越趋向于归一，在长度为12的定义域内给定十个已知点，已经可以让后验分布函数图像有一个很不错的收敛。</p>
 
 <h3 id="当有十个以上已知点时">当有十个以上已知点时</h3>
 <p>部分函数图像如下所示：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_26/10+.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_26/10+.png" alt="pic from internet" /></p>
 
 <p>随着已知点的增加，函数图像的收敛性不断增强，后验分布函数图像不断收敛，最后几乎收敛成一条线。不仅在比较大的纵坐标分度值下如此，在我对图像进行缩放使分度值统一时结果依然如此，五十条曲线几乎拟合成为同一条。
 当然，在如此小的定义域内有如此多的数据在现实中是很难实现的。</p>

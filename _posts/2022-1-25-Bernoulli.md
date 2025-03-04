@@ -3,7 +3,7 @@ layout: post
 title: '交流项目总结_Bernoulli Trial'
 date: 2022-1-25
 author: 不显电性
-cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
+cover: 'http://commcheck396.github.io/blog/assets/img/2022_1_25/topic.png'
 tags: ML Python
 ---
 
@@ -32,7 +32,7 @@ tags: ML Python
 
 现在不妨假设每次实验都是独立的，当我们进行n次实验时，便可以获得如下的概率分布，称这一串重复的独立试验为**n重伯努利试验**：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/Bern.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/Bern.png)
 
 ## 先验概率
 
@@ -57,13 +57,13 @@ tags: ML Python
 要通过先验概率求得后验概率，必须要借助贝叶斯公式。  
 这一部分是简单的概率论知识的运用，举一个最典型的例子，也是课上的例题，就是已知检出阳性，在各种条件概率的前提下，求出人确实患病的概率：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/qus1.png)
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/qus2.png)
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/qus3.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/qus1.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/qus2.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/qus3.png)
 
 可见，贝叶斯方程对于解决这类问题十分实用且快捷：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/Bayes.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/Bayes.png)
 
 
 ## Beta分布
@@ -76,11 +76,11 @@ tags: ML Python
 <br/>
 而这一部分提到的Beta分布就是一个很典型的共轭分布，我们选择了贝塔分布作为先验概率，其概率分布函数为：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/Beta.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/Beta.png)
 
 通过一些~~我非常不擅长的~~计算，我们便可以得到后验概率：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/post.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/post.png)
 
 
 利用Beta分布模型，大大降低了我们维护和更新模型的计算复杂度，也使模型的更新和维护在消费级计算机上的运行成为了可能，下面就利用代码对模型进行一些test。  
@@ -126,7 +126,7 @@ plt.show()
 
 #### `mu=0.9`,`N=100`时，先验分布为标准正态分布：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/100.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/100.png)
 
 可以看到，在标准正态分布的先验分布下，即使先验分布与真实分布相差甚远时，经过100轮的维护，最终的模型也很贴合真实分布。  
 
@@ -134,21 +134,21 @@ plt.show()
 
 #### `mu=0.9`,`N=100`时，先验分布非标准正态分布：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/100_wrong.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/100_wrong.png)
 
 可以看到，在非标准正态分布的先验分布下，由于真实分布与先验分布相差太远，100轮的维护已经不足以获得一个我们满意的模型，需要更多的数据来填补先验分布的误差。
 
 
 #### `mu=0.9`,`N=300`时，先验分布非标准正态分布：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/300.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/300.png)
 
 可以看到，在非标准正态分布的先验分布下，即使真实分布与先验分布相差太远，300轮的维护后我们获得的模型大大提升了精准度，逐渐向真实分布靠拢。
 
 
 #### `mu=0.5`,`N=50`时，先验分布为标准正态分布：
 
-![pic from internet](http://commcheck396.github.io/assets/img/2022_1_25/50.png)
+![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_25/50.png)
 
 可以看到，在标准正态分布的先验分布下，真实分布与先验分布相同时，在50轮的训练中，虽然在过程中出现了一些偏移，但五十轮之后的结果还是十分准确的。
 
