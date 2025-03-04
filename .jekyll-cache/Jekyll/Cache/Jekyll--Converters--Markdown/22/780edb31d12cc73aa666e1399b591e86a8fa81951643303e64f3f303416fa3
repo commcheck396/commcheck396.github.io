@@ -96,9 +96,9 @@
 
 <h3 id="训练方法">训练方法</h3>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/contrast.jpg" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/contrast.jpg" alt="pic from internet" /></p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/example.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/example.png" alt="pic from internet" /></p>
 <h4 id="回归拟合">回归拟合</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># optimizer 是训练的工具
 </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># 传入 net 的所有参数, learning rate
@@ -114,7 +114,7 @@
 
 <h4 id="区分类型">区分类型</h4>
 <p>利用one-hot vector输出，并利用softmax进行normalization，但在Pytorch中softmax已经被整合在CrossEntropy中，故不必单独进行softmax操作
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/ont-hot.png" alt="pic from internet" /></p>
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/ont-hot.png" alt="pic from internet" /></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="n">n_feature</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_hidden</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_output</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 几个类别就几个 output
 </span>
 <span class="c1"># optimizer 是训练的工具
@@ -186,7 +186,7 @@
 <h2 id="optimizer">Optimizer</h2>
 
 <p><del>无脑Adam就可以了</del>
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/adam.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/adam.png" alt="pic from internet" />
 几种常见的优化器：<code class="language-plaintext highlighter-rouge">SGD</code>, <code class="language-plaintext highlighter-rouge">Momentum</code>, <code class="language-plaintext highlighter-rouge">RMSprop</code>, <code class="language-plaintext highlighter-rouge">Adam</code><br />
 使用方法：</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># different optimizers
@@ -231,10 +231,10 @@
 
 <h3 id="搭建cnn网络">搭建CNN网络</h3>
 <p>CNN基础架构如图所示
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/CNN.png" alt="pic from internet" />
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/filter.jpg" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/CNN.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/filter.jpg" alt="pic from internet" />
 padding的意义：为了使经过conv的图片大小不被压缩，设为‘same’即可
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/padding.gif" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/padding.gif" alt="pic from internet" />
 Pytorch实现如下</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CNN</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>

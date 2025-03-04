@@ -18,7 +18,7 @@
 <br />
 <strong><code class="language-plaintext highlighter-rouge">urllib.request.urlopen(request)</code></strong>:按照request封装的请求打开网页，获取网页源码，request可以仅仅是一个url，也可以是封装了许多信息的一个请求，对于一些较为开放的网站比如百度等我们可以直接利用裸url进行拉取，而对于豆瓣一类稍作反爬的网站，则需要在request请求中封装headers，比如user-agent等进行访问，否则会报418。<del>你就是个杯具</del></p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic3.jpg" alt="pic from internet" />
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_19/pic3.jpg" alt="pic from internet" />
 <br /></p>
 
 <p>注意利用<code class="language-plaintext highlighter-rouge">urllib.request.urlopen(request)</code>时，若想以人类可以理解的语言查看，还需对其利用UTF-8解码模式进行解码，即<code class="language-plaintext highlighter-rouge">.read().decode('UTF-8')</code>,这样即可获得人类可以分析的网页源码。
@@ -36,7 +36,7 @@ text=res.read().decode('UTF-8')
 <p><br />
 <strong><code class="language-plaintext highlighter-rouge">urllib.request.Request()</code></strong>：用来封装访问请求，参数中可以包含<code class="language-plaintext highlighter-rouge">url</code>,<code class="language-plaintext highlighter-rouge">headers</code>,主要在headers中对程序进行伪装，可以通过浏览器的log读取用户在当前浏览器的画像，如cookie，user-agent等，按照这些参数对我们的程序进行伪装。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic1.jpg" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_19/pic1.jpg" alt="pic from internet" /></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H={
     "cookie":"buvid3=1F5EE0AB-0149-8DC6-9C89-953157CE068260962infoc; _uuid=968BBAAC-39F4-26106-19CE-7ED2432C10FB1062353infoc; buvid_fp=1F5EE0AB-0149-8DC6-9C89-953157CE068260962infoc; CURRENT_FNVAL=2000; blackside_state=1; rpdid=|(JukYmJul~0J'uYRuR~JRRJ; sid=bmzaj1dm; innersign=0; fingerprint=5b5c948ff52bc6becc5f720b86468b1d; buvid_fp_plain=undefined; b_lsid=F2CF1A10F_17E6BAD066C; PVID=6; i-wanna-go-back=1; b_ut=8",
     "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -114,12 +114,12 @@ findRating = re.compile(r'&lt;span class="rating_num" property="v:average"&gt;(.
 <p><br />
 加一个main函数，异步进行数据拉取（urllib），数据处理（BeautifulSoup，正则提取），数据保存（xlwt），即可得到一张爬取到的数据的excel表。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic4.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_19/pic4.png" alt="pic from internet" /></p>
 
 <p><br />
 学到这我兴冲冲地打开了Bilibili，准备爬百大Up，不管我怎么修改我的代码，我爬取到的网页源代码总是和我在控制台中看到的element不同。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_19/pic2.jpg" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_19/pic2.jpg" alt="pic from internet" /></p>
 
-<p>寄，Bilibili的数据是异步加载的。<del>tnnd，和我玩阴的是吧。</del>这篇博客的内容仅使用于静态网页，即不通过js动态加载元素的，右键查看源代码与控制台元素相同的网页。关于动态网页的爬取，留到<a href="https://commcheck396.github.io/2022/01/20/dynamic.html">下一篇博客</a>吧。</p>
+<p>寄，Bilibili的数据是异步加载的。<del>tnnd，和我玩阴的是吧。</del>这篇博客的内容仅使用于静commcheck396.github.io/blog��js动态加载元素的，右键查看源代码与控制台元素相同的网页。关于动态网页的爬取，留到<a href="https://commcheck396.github.io/2022/01/20/dynamic.html">下一篇博客</a>吧。</p>
 :ET

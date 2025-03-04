@@ -4,27 +4,27 @@
 Self-attention，输入是一串vector set，输出亦然，RNN网络同样可以实现类似的事情而且更好搭建，但是Self-attention可以实现数据的并行处理，而RNN仅可以实现串行，所以优先研究这个效率较高的方向了，也可能会去学一下RNN，<del>因为这个搭建起来实在是太麻烦了</del>，放在Pytorch便签中吧。</p>
 
 <p>Self-attention其实不难理解，简而言之就是用各种方法在输入的向量间找彼此的关系α，然后对输入内容进行预测，输出一个vector set。直接上图。
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/selfattention.jpg" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/selfattention.jpg" alt="pic from internet" />
 这是self-attention的整个流程，并非神经网络！若要进行机器学习训练，还需要搭建神经网络，这也便有了transformer模型。<br />
 在原始论文中Self-Attention中没有考虑位置信息，不妨加一个ei来表示位置信息，怎么理解呢，可以理解为在xi向量上加了一个one-hot表示的pi，然后经过计算发现ei并不影响原来的向量，所以加入这个位置信息不仅不会影响已有的数据，还能在输入中加入有关位置的信息，可谓一举两得。
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/position.png" alt="pic from internet" /></p>
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/position.png" alt="pic from internet" /></p>
 
 <p>其实，transformer模型和上述过程并非完全相关，与之更为相关的是下方的multihead
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/multi.jpg" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/multi.jpg" alt="pic from internet" />
 看过了整个路程，不难发现我们需要学习的参数一共就下面几个儿
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/parameter.jpg" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/parameter.jpg" alt="pic from internet" />
 Self-attention也就这么多，下面进入正题transformer。</p>
 
 <h2 id="transformer实现">Transformer实现</h2>
 <p>这个模型可以看成是一个黑箱操作。在机器翻译中，就是输入一种语言，输出另一种语言。
-<img src="http://commcheck396.github.io/assets/img/2022_2_14/transformer.png" alt="pic from internet" />
+<img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/transformer.png" alt="pic from internet" />
 这个黑箱是由编码组件、解码组件和它们之间的连接组成。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/blackbox.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/blackbox.png" alt="pic from internet" /></p>
 
 <p>编码组件部分由一堆编码器（encoder）构成（论文中是将6个编码器叠在一起）。解码组件部分也是由相同数量（与编码器对应）的解码器（decoder）组成的。所有的编码器在结构上都是相同的，但它们没有共享参数。每个解码器都可以分解成两个子层。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/bianmaqi.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/bianmaqi.png" alt="pic from internet" /></p>
 
 <p>从编码器输入的句子首先会经过一个上文提到的自注意力（self-attention）层，这层帮助编码器在对每个单词编码时关注输入句子的其他单词。</p>
 
@@ -46,13 +46,13 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 
 <p>啥？你问为啥？别问，问就是古圣先贤。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/positionf.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/positionf.png" alt="pic from internet" /></p>
 
 <h3 id="encoder">encoder</h3>
 
 <p>self-attention结构如下图所示：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/encoderlayer.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/encoderlayer.png" alt="pic from internet" /></p>
 
 <p>但在encoder layer中运用的架构并非这一个，而是Multi-Head Attention，这个问题在上文也有讨论过，其实它就是在self-attention的基础上，对于输入的embedding矩阵有多个矩阵进行数据的处理，并在得到多个结果后再进行降维，得到最终结果。</p>
 
@@ -64,7 +64,7 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 
 <p>但在transformer中，进行Normalization的手段并非之前提到的Batch Normalization，而是一种新的Normalization方式，称为Layer Normalization。二者的差别如下图所示</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/normal.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/normal.png" alt="pic from internet" /></p>
 
 <p>Layer Normalization是在同一个样本中不同神经元之间进行归一化，而Batch Normalization是在同一个batch中不同样本之间的同一位置的神经元之间进行归一化。</p>
 
@@ -78,7 +78,7 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 
 <p>其实decoder的结构与encoder的结构类似，唯一多出来的一部分就是其中包含mask操作。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/decoder.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/decoder.png" alt="pic from internet" /></p>
 
 <p>mask操作简而言之就是对数据进行某种意义上的覆盖，不要让模型接触到多余或是错误地信息，对训练过程造成影响。</p>
 
@@ -86,23 +86,23 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 
 <p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！（在下图的例子中，矩阵为1的位置为mask要覆盖的位置）</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/padding.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/padding.png" alt="pic from internet" /></p>
 
 <p>第二部分是sequence mask，sequence mask 是为了使得 decoder 不能看见未来的信息。对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。这在训练的时候有效，因为训练的时候每次我们是将target数据完整输入进decoder中地，预测时不需要，预测的时候我们只能得到前一时刻预测出的输出。</p>
 
 <p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/sequence.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/sequence.png" alt="pic from internet" /></p>
 
 <p>剩下的不同，就只剩下在decoder的输出部分了，decoder的输出部分也就是整个的transformer的输出部分。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/output.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/output.png" alt="pic from internet" /></p>
 
 <p>Output如图中所示，首先经过一次线性变换，然后Softmax得到输出的概率分布，然后通过词典，输出概率最大的对应的单词作为我们的预测输出。</p>
 
 <p>到这里transformer的所有部分也就大概说了一遍了。下面这张图儿还挺形象的。</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/transformer.gif" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/transformer.gif" alt="pic from internet" /></p>
 
 <p>懂了吗？懂了，但没完全懂，下面再结合着代码看一看吧，纸上得来终觉浅，还得打开VScode。</p>
 
@@ -219,7 +219,7 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 </code></pre></div></div>
 <p>下面我们依次来看一下上面提到的几个函数</p>
 <h3 id="positionalencoding">PositionalEncoding</h3>
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/f1.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/f1.png" alt="pic from internet" /></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PositionalEncoding</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PositionalEncoding</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
@@ -319,7 +319,7 @@ Self-attention也就这么多，下面进入正题transformer。</p>
 </code></pre></div></div>
 
 <h3 id="scaleddotproductattention">ScaledDotProductAttention</h3>
-<p><img src="http://commcheck396.github.io/assets/img/2022_2_14/encoderlayer.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_2_14/encoderlayer.png" alt="pic from internet" /></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ScaledDotProductAttention</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ScaledDotProductAttention</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>

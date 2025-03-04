@@ -61,25 +61,25 @@
 <p>选择操作，即从根节点R开始，连续向下选择子节点至叶子节点L。利用<code class="language-plaintext highlighter-rouge">best_uct</code>方法，让游戏树向最优的方向扩展，这是蒙特卡洛树搜索的精要所在。 <br /> 
 这一步的操作如图所示（箭头代表这一步的操作）：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_20/selection.svg.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_20/selection.svg.png" alt="pic from internet" /></p>
 
 <h3 id="扩展expansion">扩展（Expansion）</h3>
 <p>扩展操作，即除非任意一方的输赢使得游戏在L结束，否则创建一个或多个子节点并选取其中一个节点C。  <br />
 这一步的操作如图所示（箭头代表这一步的操作）：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_20/expansion.svg.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_20/expansion.svg.png" alt="pic from internet" /></p>
 
 <h3 id="仿真simulation">仿真（Simulation）</h3>
 <p>仿真操作，即在从节点C开始，用随机策略进行游戏，又称为playout或者rollout，直至格局达到终盘，游戏结束，产生胜负。<br />
 这一步的操作如图所示（箭头代表这一步的操作）：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_20/simulation.svg.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_20/simulation.svg.png" alt="pic from internet" /></p>
 
 <h3 id="反向传播backpropagation">反向传播（Backpropagation）</h3>
 <p>反向传播操作，即使用上一步仿真随机游戏的结果，更新从C到R的路径上的节点信息，更新每个结点的胜负值以及总盘数。<br />
 这一步的操作如图所示（箭头代表这一步的操作）：</p>
 
-<p><img src="http://commcheck396.github.io/assets/img/2022_1_20/backpropagation.svg.png" alt="pic from internet" /></p>
+<p><img src="http://commcheck396.github.io/blog/assets/img/2022_1_20/backpropagation.svg.png" alt="pic from internet" /></p>
 
 <p><em>插图中节点内的内容代表胜利次数/游戏次数，我们将利用这个参数来寻找下一步的最优的行棋位置。</em></p>
 
