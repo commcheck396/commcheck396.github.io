@@ -3,7 +3,7 @@ layout: post
 title: 'Hello Jekyll'
 date: 2022-1-15
 author: Jekyll
-cover: 'http://commcheck396.github.io/blog/assets/img/topic.jpg'
+cover: 'http://commcheck396.github.io/assets/img/topic.jpg'
 tags: Jekyll
 ---
 

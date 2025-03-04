@@ -28,7 +28,7 @@ Update 几篇前些日子看的论文笔记，连着考试两个月实在难顶�
 
 核心思想：提出语义扩充的方式来增强命名实体的识别效果
 
-![image-20220605163345059](http://commcheck396.github.io/blog/assets/img/2022_7/image-20220605163345059.png)
+![image-20220605163345059](http://commcheck396.github.io/assets/img/2022_7/image-20220605163345059.png)
 
 上图为paper中模型框架图，主要分两个部分，第一部分是左边子图的Tagging Procedure，第二部分是右边子图的Semantic Augmentation。前者可看着一个正常的序列标注识别框架，后者是论文提出的语义扩充的实现思路。其中，Gating Module是二者融合的模块。
 
@@ -121,7 +121,7 @@ Named Entity Recognition for Social Media Texts with Semantic Augmentation
 
 ### 模型整体框架
 
-![image-20220605141219805](http://commcheck396.github.io/blog/assets/img/2022_7/image-20220605141219805.png)
+![image-20220605141219805](http://commcheck396.github.io/assets/img/2022_7/image-20220605141219805.png)
 
 **表示阶段：**
 
@@ -201,4 +201,4 @@ Locate and Label: A Two-stage Identifier for Nested Named Entity Recognition
 ***
 # FGN
 淦，markdown源码叫我弄丢了，但是当初保存的PDF还在，放在这里以作纪念。RIP  
-[FGN-NER](http://commcheck396.github.io/blog/assets/img/PDF/FGN.pdf)
+[FGN-NER](http://commcheck396.github.io/assets/img/PDF/FGN.pdf)

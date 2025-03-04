@@ -4,7 +4,7 @@
 
 <p><br />
 利用蒙特卡洛树搜索实现五子棋游戏可以说是一个深度学习入门项目，也算是我第一次接触深度学习领域的项目，过程还算“比较”顺利，但是难度上还是要比之前做过的利用Q-learning实现迷宫寻路要上了一个台阶。<br />
-这篇博客主要介绍五子棋环境以及行棋动�commcheck396.github.io/blog特卡洛树搜索算法的介绍留到<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客</a>吧。</p>
+这篇博客主要�commcheck396.github.io��棋动�commcheck396.github.io/blog特卡洛树搜索算法的介绍留到<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客</a>吧。</p>
 
 <p><br /></p>
 <h2 id="五子棋棋局环境的搭建">五子棋棋局环境的搭建</h2>
@@ -120,5 +120,5 @@
 
 <p><br /><br /><br /></p>
 <h3 id="差不多就这么多了">差不多就这么多了</h3>
-<p>将上述简单动作组合在一起，这些环境已经可以实现五子棋的基本功能了�commcheck396.github.io/blog光聚焦到如何利用蒙特卡洛树搜索训练模型并搭建起人机游戏的模型上，这些内容将放在我的<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客中</a>。</p>
+<p>将上述简单动作组合在一commcheck396.github.io以实现五子棋的基本功能了�commcheck396.github.io/blog光聚焦到如何利用蒙特卡洛树搜索训练模型并搭建起人机游戏的模型上，这些内容将放在我的<a href="https://commcheck396.github.io/2022/01/21/MCTS2.html">下一篇博客中</a>。</p>
 :ET

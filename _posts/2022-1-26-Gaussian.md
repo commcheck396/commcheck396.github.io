@@ -3,7 +3,7 @@ layout: post
 title: '交流项目总结_Gaussian Processes'
 date: 2022-1-26
 author: 不显电性
-cover: 'http://commcheck396.github.io/blog/assets/img/2022_1_25/topic.png'
+cover: 'http://commcheck396.github.io/assets/img/2022_1_25/topic.png'
 tags: ML Python
 ---
 
@@ -50,19 +50,19 @@ plt.show()
 #### 当`varSigma=1.0`,`lengthscale=2.0`时：
 得出如下的函数曲线，接下来我们将使用这个曲线作为基准值进行对比：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/1,2.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/1,2.png)
 
 #### 当`varSigma=1.0`,`lengthscale=50.0`时：
 得出如下的函数曲线：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/1,50.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/1,50.png)
 
 不难看出，在`lengthscale`参数较大时，函数的平滑度相较于第一幅函数图像有了很大的提升。
 
 #### 当`varSigma=10.0`,`lengthscale=2.0`时：
 得出如下函数曲线：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/10,2.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/10,2.png)
 
 不难看出，在`varSigma`参数较大时，函数的纵坐标总体都有了一定程度的增大，说明函数在垂直方向的波动性提升了。
 
@@ -95,7 +95,7 @@ def white_kernel(x1, x2, varSigma):
 ```
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/w.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/w.png)
 
 
 ### linear covariance
@@ -108,7 +108,7 @@ def lin_kernel(x1, x2, varSigma):
 ```
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/l.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/l.png)
 
 
 ### periodic covariance
@@ -122,7 +122,7 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 ```
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/p.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/p.png)
 
 通过对这些图像的观察，我们可以发现不同的协方差函数生成的对应函数图像的特点。  
 不仅如此，我们除了可以观察不同函数图像的特点外，还可以将不同的协方差结果相乘，观察函数图形的特点：
@@ -130,21 +130,21 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 ### periodic covariance * linear covariance
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/pxl.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/pxl.png)
 
 通过观察我们不难发现，这个图像综合了两个协方差图像的特点，既具有线性，在某方向也具有一些周期性，so funny。
 
 ### periodic covariance * white-noise covariance
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/pxw.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/pxw.png)
 
 哈哈哈哈哈，由于白噪音本身就是杂乱无章的，这幅图像似乎与white-noise covariance单独作用的区别并不大，既然white-noise covariance的影响如此之大，不让让它和linear covariance组合一下，看看会产生什么结果，是否还会像这次一样直接被white-noise covariance同化。
 
 ### linear covariance * white-noise covariance
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/lxw.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/lxw.png)
 
 哈哈，猜中了，但没完全猜中，这幅图像既继承了white-noise covariance的杂乱性，也保留了linear covariance的线性，由于linear covariance的线性，整幅图像才展现出了这样的杂乱这向两侧发散的图形。  
 做一个小小的预测，如果我将这三个结果乘在一起，图像形状应该与这幅图类似，纵坐标绝对值稍大，因为periodic covariance的周期性完全被white-noise covariance抵消了。
@@ -152,7 +152,7 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 ### linear covariance * white-noise covariance * periodic covariance
 函数图像如下：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/lxwxp.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/lxwxp.png)
 
 嘿嘿，对喽。
 
@@ -162,7 +162,7 @@ def periodic_kernel(x1, x2, varSigma, period, lenthscale):
 
 假设我们已经获得了数据集D，我们要通过这个数据预测出函数的位置，这时可以将联合分布写为：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/func.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/func.png)
 
 其中 µ(·) 和 k(·,·) 是均值和协方差函数，θ 是后者的参数，我们可以利用乘积规则来处理我们的联合分布。  
 我们不妨先利用下方代码随机生成一些点，并计算一下后验分布，观察这些已知的点会对我们的后验分布函数图形造成什么烟的影响。
@@ -206,28 +206,28 @@ plt.show()
 ### 当无已知点时
 函数图形如下所示：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/0.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/0.png)
 
 不难看出，在无已知点时，各个后验分布函数图像是杂乱无章毫无规律可言的。
 
 ### 当有五个已知点时
 函数图像如下所示：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/5.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/5.png)
 
 虽然整体还是偏于无序，但在已知的五点处以及点与点之间呈现了收敛的趋势，不难总结出，已知点让后验分布趋向归一。
 
 ### 当有十个已知点时
 函数图像如下所示：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/10.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/10.png)
 
 不难看出，所给的已知点越多，函数图像越趋向于归一，在长度为12的定义域内给定十个已知点，已经可以让后验分布函数图像有一个很不错的收敛。
 
 ### 当有十个以上已知点时
 部分函数图像如下所示：
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_1_26/10+.png)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_1_26/10+.png)
 
 随着已知点的增加，函数图像的收敛性不断增强，后验分布函数图像不断收敛，最后几乎收敛成一条线。不仅在比较大的纵坐标分度值下如此，在我对图像进行缩放使分度值统一时结果依然如此，五十条曲线几乎拟合成为同一条。
 当然，在如此小的定义域内有如此多的数据在现实中是很难实现的。  

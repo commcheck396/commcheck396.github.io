@@ -3,7 +3,7 @@ layout: post
 title: '词缀小记'
 date: 2022-1-24
 author: 不显电性
-cover: 'http://commcheck396.github.io/blog/assets/img/2022_1_20/topic1.jpg'
+cover: 'http://commcheck396.github.io/assets/img/2022_1_20/topic1.jpg'
 tags: TOEFL
 ---
 

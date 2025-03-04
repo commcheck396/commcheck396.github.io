@@ -3,7 +3,7 @@ layout: post
 title: '祝20岁好运'
 date: 2022-3-22
 author: 不显电性
-cover: 'http://commcheck396.github.io/blog/assets/img/2022_7/birthday.jpg'
+cover: 'http://commcheck396.github.io/assets/img/2022_7/birthday.jpg'
 tags: Daily
 ---
 
@@ -53,4 +53,4 @@ Java课间打开知乎，热榜前三条：空难，疫情，战争。
 
 2022.3.22
 
-![pic from internet](http://commcheck396.github.io/blog/assets/img/2022_7/scientist.jpg)
+![pic from internet](http://commcheck396.github.io/assets/img/2022_7/scientist.jpg)
