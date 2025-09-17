@@ -8,7 +8,7 @@ date: 2021-9-9
 
 author: 不显电性
 
-cover: 
+cover: 'http://commcheck396.github.io/assets/img/2025_09/cover.png'
 
 tags: Interview
 
