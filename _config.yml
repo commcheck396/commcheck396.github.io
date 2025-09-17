@@ -16,6 +16,7 @@ baseurl: ''
 
 # Navigation links
 nav:
+  intro: 'https://commcheck396.github.io/introPage/'
   home: '/'
   tags: '/tags.html'
   test : '/test.html'
